@@ -7,7 +7,7 @@
 <title>TF Innovations — Interactive Science Lab</title>
 <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Oxanium:wght@400;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
 <style>
-/* ════ PHASE 1 (Core + Periodic Table + Atom Lab) ════ */
+
 :root{
   --gold:#FFD700;--gold-dark:#ccac00;--gold-glow:rgba(255,215,0,.4);
   --sky-top:#87ceeb;--sky-mid:#b0e0e6;--sky-bot:#ffffff;
@@ -97,7 +97,7 @@ html,body{width:100%;height:100%;font-family:'Oxanium',sans-serif;overflow-x:hid
 .dot{width:12px;height:12px;border-radius:50%;flex-shrink:0;}
 
 /* ── PERIODIC TABLE WRAPPER ── */
-.table-scroll-wrap{overflow-x:auto;width:100%;padding:0 8px 8px;}
+.table-scroll-wrap{overflow-x:auto;width:100%;padding:0 8px 8px;display:flex;justify-content:center;}
 
 /* ── PERIOD + GROUP LABELS ── */
 .table-with-labels{display:inline-flex;flex-direction:column;align-items:flex-start;}
@@ -338,16 +338,105 @@ table.hide_optional tr.optional{display:none;}
   :root{--card-w:290px;}
 }
 
+
 /* ════ WAVELENGTHS PAGE ════ */
 #wavelengths-page {
   background:linear-gradient(160deg,#FF8C42 0%,#FFB347 30%,#FFF8F0 75%);
-  overflow-y:auto;justify-content:flex-start;padding:0;
+  overflow-y:auto;justify-content:flex-start;padding:0;min-height:100vh;
 }
-.wl-inner-page {
-  display:none;flex-direction:column;align-items:center;
-  padding:20px 20px 60px;max-width:900px;margin:0 auto;width:100%;
-}
-.wl-inner-page.active {display:flex;}
+.wl-subpage{display:none;flex-direction:column;align-items:center;padding:20px 20px 60px;max-width:900px;margin:0 auto;width:100%;}
+.wl-subpage.active{display:flex;}
+.wl-nav-bar{width:100%;background:rgba(255,255,255,.18);backdrop-filter:blur(10px);border-bottom:2px solid rgba(255,107,0,.35);padding:12px 20px;display:flex;align-items:center;gap:14px;position:sticky;top:0;z-index:50;}
+.wl-nav-title{font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:4px;color:#cc5500;font-size:1.1em;flex:1;}
+
+/* ════ SIMULATIONS PAGE ════ */
+#simulations-page{background:linear-gradient(160deg,#1a1a2e 0%,#16213e 50%,#0f3460 100%);overflow-y:auto;justify-content:flex-start;padding:0;}
+.sim-nav-bar{width:100%;background:rgba(255,255,255,.08);backdrop-filter:blur(12px);border-bottom:2px solid rgba(255,215,0,.25);padding:12px 24px;display:flex;align-items:center;gap:14px;position:sticky;top:0;z-index:50;}
+.sim-nav-title{font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:4px;color:var(--gold);font-size:1.2em;flex:1;}
+.sim-intro{padding:30px 24px 10px;max-width:1100px;margin:0 auto;width:100%;text-align:center;}
+.sim-intro-title{font-family:'Rajdhani',sans-serif;font-size:1.8em;font-weight:700;color:var(--gold);letter-spacing:4px;text-transform:uppercase;margin-bottom:10px;}
+.sim-intro-sub{font-size:.85em;color:rgba(255,255,255,.6);line-height:1.7;max-width:600px;margin:0 auto;}
+#sim-grid-wrap{padding:24px;max-width:1100px;margin:0 auto;width:100%;}
+#sim-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:18px;}
+.sim-card{background:rgba(255,255,255,.07);border:2px solid rgba(255,215,0,.2);border-radius:18px;padding:24px 18px;cursor:pointer;text-align:center;transition:.3s;backdrop-filter:blur(8px);}
+.sim-card:hover{transform:translateY(-6px);background:rgba(255,255,255,.12);border-color:var(--gold);box-shadow:0 12px 32px rgba(0,0,0,.3);}
+.sim-icon{font-size:2.4em;margin-bottom:10px;}
+.sim-name{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1em;letter-spacing:2px;text-transform:uppercase;margin-bottom:8px;}
+.sim-desc{font-size:.72em;color:rgba(255,255,255,.55);line-height:1.5;}
+#sim-detail{display:none;flex-direction:column;width:100%;max-width:1200px;margin:0 auto;padding:0 0 40px;flex:1;}
+.sim-detail-header{padding:16px 24px;display:flex;align-items:center;gap:14px;border-bottom:1px solid rgba(255,215,0,.15);}
+#sim-detail-title{font-family:'Rajdhani',sans-serif;font-size:1.4em;font-weight:700;letter-spacing:3px;text-transform:uppercase;flex:1;}
+.sim-back-btn{background:rgba(255,255,255,.1);border:1px solid rgba(255,215,0,.3);color:var(--gold);padding:7px 18px;border-radius:16px;cursor:pointer;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.82em;letter-spacing:1.5px;transition:.2s;}
+.sim-back-btn:hover{background:rgba(255,215,0,.2);}
+.sim-split{display:grid;grid-template-columns:340px 1fr;gap:0;flex:1;min-height:600px;}
+#sim-theory{background:rgba(255,255,255,.06);border-right:1px solid rgba(255,255,255,.1);padding:20px;overflow-y:auto;display:flex;flex-direction:column;gap:14px;}
+.theory-def-box{background:rgba(255,255,255,.08);border-left:4px solid;border-radius:10px;padding:14px 16px;}
+.theory-def-label{font-size:.6em;text-transform:uppercase;letter-spacing:2px;font-weight:700;font-family:'Rajdhani',sans-serif;margin-bottom:6px;}
+.theory-def-text{font-size:.8em;color:rgba(255,255,255,.8);line-height:1.7;}
+.theory-plain-box{background:rgba(255,215,0,.08);border-radius:10px;padding:14px 16px;border:1px solid rgba(255,215,0,.2);}
+.theory-plain-label{font-size:.62em;text-transform:uppercase;letter-spacing:1.5px;color:var(--gold);font-weight:700;font-family:'Rajdhani',sans-serif;margin-bottom:6px;}
+.theory-plain-text{font-size:.8em;color:rgba(255,255,255,.75);line-height:1.7;}
+.theory-concept{background:rgba(255,255,255,.05);border-radius:10px;padding:12px 14px;border:1px solid rgba(255,255,255,.08);}
+.theory-concept-title{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.88em;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;}
+.theory-concept-body{font-size:.78em;color:rgba(255,255,255,.7);line-height:1.65;}
+.sim-iframe-wrap{flex:1;position:relative;min-height:500px;}
+#sim-iframe{width:100%;height:100%;min-height:500px;border:none;background:#000;}
+
+/* ════ STUDY PAGE ════ */
+#study-page{background:linear-gradient(160deg,#1e1e2e 0%,#2d2b55 50%,#1a1a3e 100%);overflow-y:auto;justify-content:flex-start;padding:0;}
+.study-nav-bar{width:100%;background:rgba(255,255,255,.08);backdrop-filter:blur(12px);border-bottom:2px solid rgba(124,58,237,.3);padding:12px 24px;display:flex;align-items:center;gap:14px;position:sticky;top:0;z-index:50;}
+.study-nav-title{font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:4px;color:#a78bfa;font-size:1.2em;flex:1;}
+.study-layout{display:grid;grid-template-columns:240px 1fr;gap:20px;max-width:1200px;margin:0 auto;width:100%;padding:20px 24px;}
+#study-tabs{display:flex;flex-direction:column;gap:8px;}
+.study-tab-btn{background:rgba(255,255,255,.06);border:2px solid rgba(255,255,255,.1);border-radius:12px;padding:12px 16px;cursor:pointer;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.88em;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.7);transition:.25s;text-align:left;}
+.study-tab-btn:hover{background:rgba(255,255,255,.1);}
+.study-tab-btn.active{color:white;}
+.study-right{display:flex;flex-direction:column;gap:14px;}
+.study-ai-bar{background:rgba(255,255,255,.07);border:1px solid rgba(124,58,237,.3);border-radius:16px;padding:14px 16px;display:flex;flex-direction:column;gap:8px;}
+.study-ai-label{font-family:'Rajdhani',sans-serif;font-size:.7em;letter-spacing:2px;text-transform:uppercase;color:#a78bfa;font-weight:700;}
+.study-ai-row{display:flex;gap:8px;}
+#study-ask{flex:1;background:rgba(255,255,255,.08);border:1px solid rgba(124,58,237,.3);border-radius:10px;padding:9px 14px;color:white;font-size:.85em;font-family:'Oxanium',sans-serif;outline:none;}
+#study-ask::placeholder{color:rgba(255,255,255,.35);}
+#study-ask:focus{border-color:#a78bfa;}
+.study-ai-btn{background:linear-gradient(135deg,#7c3aed,#a78bfa);border:none;color:white;padding:9px 18px;border-radius:10px;cursor:pointer;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.82em;letter-spacing:1px;white-space:nowrap;transition:.2s;}
+.study-ai-btn:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(124,58,237,.4);}
+.study-ai-loading{display:flex;gap:6px;padding:10px;align-items:center;}
+.study-dot{width:8px;height:8px;border-radius:50%;background:#a78bfa;animation:typing-bounce .8s ease-in-out infinite;}
+.study-dot:nth-child(2){animation-delay:.15s;}.study-dot:nth-child(3){animation-delay:.3s;}
+.study-ai-preview{background:rgba(255,255,255,.06);border:1px solid rgba(124,58,237,.3);border-radius:12px;padding:14px 16px;}
+.study-ai-preview-title{font-family:'Rajdhani',sans-serif;font-weight:700;color:#a78bfa;font-size:1em;letter-spacing:1px;margin-bottom:8px;}
+.study-ai-preview-body{font-size:.8em;color:rgba(255,255,255,.75);line-height:1.7;}
+.study-save-btn{background:linear-gradient(135deg,#7c3aed,#a78bfa);border:none;color:white;padding:7px 16px;border-radius:10px;cursor:pointer;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.8em;transition:.2s;}
+.study-save-btn:hover{transform:translateY(-1px);}
+.study-discard-btn{background:transparent;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.5);padding:7px 14px;border-radius:10px;cursor:pointer;font-size:.8em;transition:.2s;}
+.study-discard-btn:hover{color:#e74c3c;}
+.note-write-area{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:14px 16px;display:flex;flex-direction:column;gap:8px;}
+.note-write-label{font-family:'Rajdhani',sans-serif;font-size:.7em;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.5);}
+#note-title,#note-body{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:8px 12px;color:white;font-family:'Oxanium',sans-serif;font-size:.82em;outline:none;resize:none;}
+#note-title::placeholder,#note-body::placeholder{color:rgba(255,255,255,.25);}
+#note-title:focus,#note-body:focus{border-color:#a78bfa;}
+.note-save-manual-btn{background:rgba(124,58,237,.3);border:1px solid #7c3aed;color:#a78bfa;padding:8px 18px;border-radius:10px;cursor:pointer;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.82em;letter-spacing:1px;transition:.2s;align-self:flex-start;}
+.note-save-manual-btn:hover{background:#7c3aed;color:white;}
+#notes-area{display:flex;flex-direction:column;gap:10px;}
+.notes-empty{text-align:center;padding:40px 20px;}
+.note-card{background:rgba(255,255,255,.07);border-left:4px solid;border-radius:10px;padding:14px 16px;border-top:1px solid rgba(255,255,255,.08);border-right:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.08);}
+.note-card-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:8px;}
+.note-card-title{font-family:'Rajdhani',sans-serif;font-weight:700;color:white;font-size:.95em;letter-spacing:1px;}
+.note-delete-btn{background:none;border:none;color:rgba(255,255,255,.3);cursor:pointer;font-size:.9em;transition:.2s;}
+.note-delete-btn:hover{color:#e74c3c;}
+.note-card-body{font-size:.78em;color:rgba(255,255,255,.65);line-height:1.7;}
+.note-card-meta{font-size:.65em;color:rgba(255,255,255,.3);margin-top:8px;font-family:'Rajdhani',sans-serif;}
+
+/* ════ SEBATANA RIGHT-SIDE ════ */
+#seb-idle{position:fixed;right:18px;bottom:30px;width:68px;height:68px;z-index:300;cursor:pointer;display:none;}
+#seb-idle.visible{display:block;}
+#seb-panel{position:fixed;right:-420px;bottom:20px;left:auto!important;transition:right .5s cubic-bezier(.23,1,.32,1);}
+#seb-panel.open{right:18px;left:auto!important;}
+
+/* ════ TABLE CENTRE ════ */
+.table-scroll-wrap{overflow-x:auto;width:100%;padding:0 8px 8px;display:flex;justify-content:center;}
+
+
 
 
 
@@ -542,7 +631,7 @@ input[type=range]{width:100%;accent-color:var(--orange);}
   .calc-row{flex-direction:column;align-items:flex-start;}
 }
 
-/* ════ SEBATANA + THESIS (Phase 2b) ════ */
+
 /* ══════════════════════════════════════
    ROOT & RESET
 ══════════════════════════════════════ */
@@ -1045,10 +1134,10 @@ input[type=range]{width:100%;accent-color:var(--orange);}
    UTILITIES
 ══════════════════════════════════════ */
 .hidden{display:none!important;}
+
 </style>
 </head>
 <body>
-
 <!-- ════════ HOME ════════ -->
 <div id="home-page" class="page">
   <div class="tf-logo-container">
@@ -1071,6 +1160,7 @@ input[type=range]{width:100%;accent-color:var(--orange);}
   </div>
   <button class="btn" onclick="goToLab()">Enter Lab</button>
 </div>
+
 
 <!-- ════════ ROTARY WHEEL ════════ -->
 <div id="rotary-trigger" onclick="togglePanel()">
@@ -1100,9 +1190,29 @@ input[type=range]{width:100%;accent-color:var(--orange);}
   <div class="panel-title">TF Lab Modes</div>
   <button class="panel-mode-btn" onclick="switchToTable()"><span class="mode-icon">⚛</span>Periodic Table</button>
   <button class="panel-mode-btn" onclick="switchToAtomLab()"><span class="mode-icon">🔬</span>Atom Bonding Lab</button>
+</div>
+
+
+<!-- ════════ ROTARY PANEL ════════ -->
+<div id="rotary-panel">
+  <button class="panel-close" onclick="togglePanel()">✕</button>
+  <svg class="panel-logo" viewBox="0 0 100 100"><defs><linearGradient id="gG3" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#FFD700"/><stop offset="100%" stop-color="#FFA500"/>
+  </linearGradient></defs>
+  <rect x="45" y="15" width="10" height="73" rx="2" fill="url(#gG3)"/>
+  <rect x="25" y="15" width="50" height="10" rx="2" fill="url(#gG3)"/>
+  <rect x="45" y="45" width="25" height="10" rx="2" fill="url(#gG3)"/>
+  <path d="M50,88 C20,88 5,68 5,48 C5,23 25,8 50,8 C75,8 95,23 95,48" fill="none" stroke="url(#gG3)" stroke-width="5"/>
+  </svg>
+  <div class="panel-title">TF Lab Modes</div>
+  <button class="panel-mode-btn" onclick="switchToTable()"><span class="mode-icon">⚛</span>Periodic Table</button>
+  <button class="panel-mode-btn" onclick="switchToAtomLab()"><span class="mode-icon">🔬</span>Atom Bonding Lab</button>
   <button class="panel-mode-btn" onclick="switchToWavelengths()"><span class="mode-icon">〰️</span>Wavelengths</button>
   <button class="panel-mode-btn" onclick="switchToThesis()"><span class="mode-icon">📝</span>Thesis Mode</button>
+  <button class="panel-mode-btn" onclick="switchToSimulations()"><span class="mode-icon">🔭</span>Simulations</button>
+  <button class="panel-mode-btn" onclick="switchToStudy()"><span class="mode-icon">📓</span>Study Notes</button>
 </div>
+
 
 <!-- ════════ TABLE PAGE ════════ -->
 <div id="table-page" class="page hidden">
@@ -1307,6 +1417,7 @@ input[type=range]{width:100%;accent-color:var(--orange);}
   </div>
 </div>
 
+
 <!-- ════════ 3D CARD ════════ -->
 <div id="elem-card-wrap">
   <div id="elem-card">
@@ -1352,6 +1463,7 @@ input[type=range]{width:100%;accent-color:var(--orange);}
   </div>
 </div>
 
+
 <!-- ════════ LAB PAGE ════════ -->
 <div id="lab-page" class="page hidden">
   <div class="lab-topbar" id="labTopbar">
@@ -1392,771 +1504,13 @@ input[type=range]{width:100%;accent-color:var(--orange);}
   </div>
 </div>
 
-<!-- ════════════════════════════════════
-     JAVASCRIPT
-════════════════════════════════════ -->
-<script>
-// ════════════════════════════════════
-// FULL ELEMENT DATABASE (all 118 + D)
-// ════════════════════════════════════
-const ED = {
-  H: {name:'Hydrogen',   mass:1.008,  n:1,   grp:'Group 1 (Non-metal)',    grpNum:1,  e:1,   val:1, give:1,  action:'gives',   use:'Rocket fuel, fuel cells, water formation',  bonds:'O, N, Cl, F, C',  desc:'The lightest and most abundant element in the universe. Forms diatomic H₂ naturally. Essential component of water and all organic molecules.',col:'#a8d8ea'},
-  He:{name:'Helium',     mass:4.003,  n:2,   grp:'Group 18 (Noble Gas)',   grpNum:18, e:2,   val:0, give:0,  action:'neutral', use:'Balloons, MRI cooling, welding shields',     bonds:'None (inert)',    desc:'Noble gas with a completely full outer shell. Cannot bond with anything. Second most abundant element in the universe.',col:'#dda0dd'},
-  Li:{name:'Lithium',    mass:6.941,  n:3,   grp:'Group 1 (Alkali Metal)', grpNum:1,  e:3,   val:1, give:1,  action:'gives',   use:'Lithium-ion batteries, psychiatric medicine',bonds:'O, F, Cl, N',     desc:'Lightest solid metal. Highly reactive with water and air. Key component of rechargeable batteries used in phones and electric vehicles.',col:'#ff9999'},
-  Be:{name:'Beryllium',  mass:9.012,  n:4,   grp:'Group 2 (Alk. Earth)',   grpNum:2,  e:4,   val:2, give:2,  action:'gives',   use:'Aerospace alloys, X-ray windows, nuclear reactors',bonds:'O, F, Cl',  desc:'Hard, lightweight metal. Used in aerospace for its rigidity and low density. Toxic in powder form.',col:'#ffdead'},
-  B: {name:'Boron',      mass:10.81,  n:5,   grp:'Group 13 (Metalloid)',   grpNum:13, e:5,   val:3, give:3,  action:'gives',   use:'Borosilicate glass, detergents, semiconductors',bonds:'O, N, H, F', desc:'Metalloid that acts as a semiconductor dopant. Found in borax and boric acid. Essential micronutrient for plants.',col:'#f0e68c'},
-  C: {name:'Carbon',     mass:12.01,  n:6,   grp:'Group 14 (Non-metal)',   grpNum:14, e:6,   val:4, give:0,  action:'shares',  use:'All organic life, graphite, diamonds, fuel',  bonds:'H, O, N, S, Cl', desc:'The backbone of all organic chemistry. Forms more compounds than any other element. Exists as graphite (soft), diamond (hardest natural material), and carbon nanotubes.',col:'#778ca3'},
-  N: {name:'Nitrogen',   mass:14.01,  n:7,   grp:'Group 15 (Non-metal)',   grpNum:15, e:7,   val:5, give:0,  action:'receives',use:'Fertilisers, explosives, atmosphere, protein',  bonds:'H, O, C, B',     desc:'Makes up 78% of Earth\'s atmosphere as N₂. Essential for amino acids, DNA, and RNA. Industrially converted to ammonia via the Haber process.',col:'#6ec6ff'},
-  O: {name:'Oxygen',     mass:16.00,  n:8,   grp:'Group 16 (Non-metal)',   grpNum:16, e:8,   val:6, give:0,  action:'receives',use:'Breathing, combustion, steel making, medicine', bonds:'H, C, N, Fe, Si', desc:'Essential for respiration and combustion. Diatomic O₂ in air. Highly electronegative — bonds to almost every other element.',col:'#ff6b6b'},
-  F: {name:'Fluorine',   mass:19.00,  n:9,   grp:'Group 17 (Halogen)',     grpNum:17, e:9,   val:7, give:0,  action:'receives',use:'Toothpaste (fluoride), Teflon, refrigerants',  bonds:'H, C, Na, Ca',   desc:'Most electronegative element in existence. So reactive it will set glass alight. Forms the strongest single bond with carbon.',col:'#98fb98'},
-  Ne:{name:'Neon',       mass:20.18,  n:10,  grp:'Group 18 (Noble Gas)',   grpNum:18, e:10,  val:0, give:0,  action:'neutral', use:'Neon signs, lasers, cryogenic refrigerants',  bonds:'None (inert)',    desc:'Noble gas famous for its vivid red-orange glow in neon lighting when electrically excited. Third lightest element.',col:'#dda0dd'},
-  Na:{name:'Sodium',     mass:22.99,  n:11,  grp:'Group 1 (Alkali Metal)', grpNum:1,  e:11,  val:1, give:1,  action:'gives',   use:'Table salt (NaCl), soap, street lighting',    bonds:'Cl, O, F, OH',   desc:'Highly reactive alkali metal that reacts vigorously with water. Key electrolyte in biological cells. Forms table salt with chlorine.',col:'#ff9999'},
-  Mg:{name:'Magnesium',  mass:24.31,  n:12,  grp:'Group 2 (Alk. Earth)',   grpNum:2,  e:12,  val:2, give:2,  action:'gives',   use:'Alloys, fireworks (white flame), medicine',   bonds:'O, Cl, N, S',    desc:'Lightweight structural metal. Burns with brilliant white flame. Essential mineral in the human body — over 300 enzymes rely on it.',col:'#ffdead'},
-  Al:{name:'Aluminium',  mass:26.98,  n:13,  grp:'Group 13 (Post-Trans.)', grpNum:13, e:13,  val:3, give:3,  action:'gives',   use:'Cans, aircraft, foil, electrical wiring',    bonds:'O, Cl, F, S',    desc:'Most abundant metal in Earth\'s crust. Lightweight, corrosion-resistant due to oxide layer. Used extensively in aerospace and packaging.',col:'#dcdcdc'},
-  Si:{name:'Silicon',    mass:28.09,  n:14,  grp:'Group 14 (Metalloid)',   grpNum:14, e:14,  val:4, give:0,  action:'shares',  use:'Semiconductors, glass, solar panels, chips', bonds:'O, H, Cl, F',    desc:'Foundation of modern electronics. Second most abundant element in Earth\'s crust. Silicon dioxide (SiO₂) makes up sand and quartz.',col:'#f0e68c'},
-  P: {name:'Phosphorus', mass:30.97,  n:15,  grp:'Group 15 (Non-metal)',   grpNum:15, e:15,  val:5, give:0,  action:'receives',use:'Fertilisers, matches, DNA and RNA, ATP',      bonds:'O, H, N, Cl',    desc:'Essential for DNA, RNA, and ATP (the cell\'s energy currency). White phosphorus ignites spontaneously in air. Red phosphorus is stable and used in matches.',col:'#ffb347'},
-  S: {name:'Sulfur',     mass:32.07,  n:16,  grp:'Group 16 (Non-metal)',   grpNum:16, e:16,  val:6, give:0,  action:'receives',use:'Sulfuric acid, rubber vulcanisation, medicine',bonds:'O, H, C, N, Fe',  desc:'Yellow solid. Forms sulfuric acid — the world\'s most widely produced industrial chemical. Present in amino acids cysteine and methionine.',col:'#ffe066'},
-  Cl:{name:'Chlorine',   mass:35.45,  n:17,  grp:'Group 17 (Halogen)',     grpNum:17, e:17,  val:7, give:0,  action:'receives',use:'Water purification, bleach, PVC plastic',     bonds:'Na, H, C, Mg, Ca',desc:'Toxic yellow-green gas at room temperature. Widely used to disinfect water supplies. Reacts with metals to form salts (e.g. NaCl with sodium).',col:'#b5ead7'},
-  Ar:{name:'Argon',      mass:39.95,  n:18,  grp:'Group 18 (Noble Gas)',   grpNum:18, e:18,  val:0, give:0,  action:'neutral', use:'Welding shield gas, incandescent light bulbs',bonds:'None (inert)',    desc:'Third most abundant gas in Earth\'s atmosphere (0.93%). Used as an inert protective shield in welding to prevent oxidation.',col:'#dda0dd'},
-  K: {name:'Potassium',  mass:39.10,  n:19,  grp:'Group 1 (Alkali Metal)', grpNum:1,  e:19,  val:1, give:1,  action:'gives',   use:'Fertilisers, gunpowder, electrolyte in cells',bonds:'Cl, O, F, Br',   desc:'Essential electrolyte in all living cells. Reacts explosively with water, producing a purple-pink flame. Named from "potash" (wood ash).',col:'#ff9999'},
-  Ca:{name:'Calcium',    mass:40.08,  n:20,  grp:'Group 2 (Alk. Earth)',   grpNum:2,  e:20,  val:2, give:2,  action:'gives',   use:'Bones, teeth, concrete, limestone, milk',    bonds:'O, Cl, F, S',    desc:'Most abundant metal in the human body — 99% stored in bones and teeth. Makes up limestone, marble, and chalk as calcium carbonate.',col:'#ffdead'},
-  Sc:{name:'Scandium',   mass:44.96,  n:21,  grp:'Group 3 (Transition)',   grpNum:3,  e:21,  val:3, give:3,  action:'gives',   use:'Aluminium alloys for aerospace, sports equipment',bonds:'O, F, Cl',  desc:'Rare transition metal. Added to aluminium alloys to dramatically increase strength without adding much weight.',col:'#add8e6'},
-  Ti:{name:'Titanium',   mass:47.87,  n:22,  grp:'Group 4 (Transition)',   grpNum:4,  e:22,  val:4, give:0,  action:'shares',  use:'Aircraft, medical implants, white paint (TiO₂)',bonds:'O, N, Cl',   desc:'Strong, lightweight, and biocompatible metal. TiO₂ is the whitest known pigment used in paints. Used for hip/knee replacements due to biocompatibility.',col:'#add8e6'},
-  V: {name:'Vanadium',   mass:50.94,  n:23,  grp:'Group 5 (Transition)',   grpNum:5,  e:23,  val:5, give:0,  action:'shares',  use:'Steel alloys, vanadium flow batteries, catalyst',bonds:'O, N, Cl',  desc:'Hard metal used to toughen steel. Vanadium redox flow batteries are promising for large-scale energy storage.',col:'#add8e6'},
-  Cr:{name:'Chromium',   mass:52.00,  n:24,  grp:'Group 6 (Transition)',   grpNum:6,  e:24,  val:6, give:0,  action:'shares',  use:'Stainless steel, chrome plating, pigments',  bonds:'O, F, Cl, N',    desc:'Gives stainless steel its rust resistance. Chrome plating protects metals. Chromium(III) is an essential trace element; chromium(VI) is toxic.',col:'#add8e6'},
-  Mn:{name:'Manganese',  mass:54.94,  n:25,  grp:'Group 7 (Transition)',   grpNum:7,  e:25,  val:7, give:0,  action:'shares',  use:'Steel hardening, batteries, pigments, fertiliser',bonds:'O, S, Cl', desc:'Essential for hardening steel. Found in alkaline batteries. Biological role in photosynthesis — splits water molecules to release oxygen.',col:'#add8e6'},
-  Fe:{name:'Iron',       mass:55.85,  n:26,  grp:'Group 8 (Transition)',   grpNum:8,  e:26,  val:3, give:3,  action:'gives',   use:'Steel, tools, bridges, haemoglobin in blood',bonds:'O, S, C, N, Cl', desc:'Most used metal on Earth. Carries oxygen in blood via haemoglobin. Earth\'s inner core is solid iron. Steel is iron with a small amount of carbon.',col:'#add8e6'},
-  Co:{name:'Cobalt',     mass:58.93,  n:27,  grp:'Group 9 (Transition)',   grpNum:9,  e:27,  val:3, give:3,  action:'gives',   use:'Lithium-ion batteries, blue pigment, magnets',bonds:'O, S, Cl, N',    desc:'Blue pigment used since the Renaissance. Vital in lithium-ion battery cathodes. Vitamin B₁₂ contains a cobalt atom.',col:'#add8e6'},
-  Ni:{name:'Nickel',     mass:58.69,  n:28,  grp:'Group 10 (Transition)',  grpNum:10, e:28,  val:2, give:2,  action:'gives',   use:'Stainless steel, coins, rechargeable batteries',bonds:'O, S, Cl, F',  desc:'Corrosion-resistant metal used in coins and alloys. Nickel-metal hydride batteries power hybrid cars.',col:'#add8e6'},
-  Cu:{name:'Copper',     mass:63.55,  n:29,  grp:'Group 11 (Transition)',  grpNum:11, e:29,  val:2, give:2,  action:'gives',   use:'Electrical wiring, pipes, bronze, coins',    bonds:'O, S, Cl, N',    desc:'Excellent electrical conductor — almost all electrical wiring is copper. One of the first metals smelted by humans, around 9000 BCE.',col:'#ffb347'},
-  Zn:{name:'Zinc',       mass:65.38,  n:30,  grp:'Group 12 (Transition)',  grpNum:12, e:30,  val:2, give:2,  action:'gives',   use:'Galvanising steel, alloys (brass), medicine', bonds:'O, Cl, S, N',    desc:'Used to galvanise steel against rust. Essential trace element — involved in over 300 enzymatic reactions. Zinc oxide used in sunscreen.',col:'#add8e6'},
-  Ga:{name:'Gallium',    mass:69.72,  n:31,  grp:'Group 13 (Post-Trans.)', grpNum:13, e:31,  val:3, give:3,  action:'gives',   use:'LEDs, semiconductors, medical imaging',      bonds:'As, N, O, Cl',   desc:'Melts just above room temperature (29.76°C). Used in LEDs (GaN) and semiconductors. Gallium arsenide (GaAs) used in solar cells.',col:'#dcdcdc'},
-  Ge:{name:'Germanium',  mass:72.63,  n:32,  grp:'Group 14 (Metalloid)',   grpNum:14, e:32,  val:4, give:0,  action:'shares',  use:'Semiconductors, fibre optics, infrared optics',bonds:'O, H, Cl, F',  desc:'Semiconductor predicted by Mendeleev before its discovery. Used in fibre optic cables and infrared camera lenses.',col:'#f0e68c'},
-  As:{name:'Arsenic',    mass:74.92,  n:33,  grp:'Group 15 (Metalloid)',   grpNum:15, e:33,  val:5, give:0,  action:'receives',use:'Semiconductor dopant, wood preservative (banned)',bonds:'O, S, H, Cl', desc:'Notorious poison historically used in murders. Now used as a semiconductor dopant. Arsenic trioxide is FDA-approved to treat leukemia.',col:'#f0e68c'},
-  Se:{name:'Selenium',   mass:78.97,  n:34,  grp:'Group 16 (Non-metal)',   grpNum:16, e:34,  val:6, give:0,  action:'receives',use:'Solar cells, glass colouring, essential nutrient',bonds:'H, O, C, N',  desc:'Essential trace mineral. Used in glass-making to neutralise green colour. Selenium solar cells were among the first photovoltaics.',col:'#98fb98'},
-  Br:{name:'Bromine',    mass:79.90,  n:35,  grp:'Group 17 (Halogen)',     grpNum:17, e:35,  val:7, give:0,  action:'receives',use:'Flame retardants, photography, medicine',     bonds:'H, C, Na, Ag',   desc:'One of only two elements liquid at room temperature. Reddish-brown, pungent. Used in flame retardants and historically in photography.',col:'#e2a87c'},
-  Kr:{name:'Krypton',    mass:83.80,  n:36,  grp:'Group 18 (Noble Gas)',   grpNum:18, e:36,  val:0, give:0,  action:'neutral', use:'Fluorescent lighting, lasers, photography',  bonds:'None (inert)',    desc:'Noble gas. The krypton-86 spectral line was once used as the international standard for the metre.',col:'#dda0dd'},
-  Rb:{name:'Rubidium',   mass:85.47,  n:37,  grp:'Group 1 (Alkali Metal)', grpNum:1,  e:37,  val:1, give:1,  action:'gives',   use:'Atomic clocks, medical imaging, fireworks (purple)',bonds:'O, Cl, F', desc:'Very reactive alkali metal. Used in atomic clocks that keep GPS satellites accurate. Burns with a purple-violet flame.',col:'#ff9999'},
-  Sr:{name:'Strontium',  mass:87.62,  n:38,  grp:'Group 2 (Alk. Earth)',   grpNum:2,  e:38,  val:2, give:2,  action:'gives',   use:'Fireworks (crimson red), CRT displays, medicine',bonds:'O, Cl, F, S', desc:'Burns brilliant crimson red — used in fireworks and flares. Radioactive Sr-90 (from nuclear fallout) is dangerous as it replaces calcium in bones.',col:'#ffdead'},
-  Y: {name:'Yttrium',    mass:88.91,  n:39,  grp:'Group 3 (Transition)',   grpNum:3,  e:39,  val:3, give:3,  action:'gives',   use:'LED phosphors, laser crystals, superconductors',bonds:'O, F, Cl',   desc:'Named after Ytterby, a Swedish village that gave its name to four elements. Used in the red phosphor in TV/LED screens.',col:'#add8e6'},
-  Zr:{name:'Zirconium',  mass:91.22,  n:40,  grp:'Group 4 (Transition)',   grpNum:4,  e:40,  val:4, give:0,  action:'shares',  use:'Nuclear reactor cladding, ceramic knives, gems',bonds:'O, N, Cl',  desc:'Exceptionally resistant to corrosion and neutron absorption. Used to clad nuclear fuel rods. Cubic zirconia is a diamond simulant.',col:'#add8e6'},
-  Nb:{name:'Niobium',    mass:92.91,  n:41,  grp:'Group 5 (Transition)',   grpNum:5,  e:41,  val:5, give:0,  action:'shares',  use:'Superconducting magnets, high-strength steel, coins',bonds:'O, N, C', desc:'Superconductor at low temperatures — used in MRI magnets. Makes steel stronger at high temperatures for jet engines.',col:'#add8e6'},
-  Mo:{name:'Molybdenum', mass:95.96,  n:42,  grp:'Group 6 (Transition)',   grpNum:6,  e:42,  val:6, give:0,  action:'shares',  use:'High-temp alloys, catalysts, essential enzyme cofactor',bonds:'O, S, N', desc:'Used to harden steel for high-temperature applications. Essential cofactor for nitrogenase, the enzyme that fixes atmospheric nitrogen.',col:'#add8e6'},
-  Tc:{name:'Technetium', mass:98,     n:43,  grp:'Group 7 (Transition)',   grpNum:7,  e:43,  val:7, give:0,  action:'shares',  use:'Medical imaging (nuclear medicine, bone scans)',bonds:'O, N, S',     desc:'First artificially produced element (1937). Has no stable isotopes. Technetium-99m is the most used radioisotope in medical diagnostics.',col:'#add8e6'},
-  Ru:{name:'Ruthenium',  mass:101.1,  n:44,  grp:'Group 8 (Transition)',   grpNum:8,  e:44,  val:3, give:0,  action:'shares',  use:'Catalysts, hard disk coatings, solar cells',  bonds:'O, N, Cl, C',    desc:'Rare platinum-group metal used as a catalyst. Tiny amounts added to platinum or palladium increase their hardness tenfold.',col:'#add8e6'},
-  Rh:{name:'Rhodium',    mass:102.9,  n:45,  grp:'Group 9 (Transition)',   grpNum:9,  e:45,  val:3, give:0,  action:'shares',  use:'Catalytic converters, jewellery plating, mirrors',bonds:'O, Cl, N',   desc:'One of the rarest and most valuable metals. Critical component of catalytic converters that reduce toxic car emissions.',col:'#add8e6'},
-  Pd:{name:'Palladium',  mass:106.4,  n:46,  grp:'Group 10 (Transition)',  grpNum:10, e:46,  val:2, give:0,  action:'shares',  use:'Catalytic converters, hydrogen purification, electronics',bonds:'O, Cl, N', desc:'Platinum-group metal that can absorb up to 900 times its volume in hydrogen. Used in catalytic converters and hydrogen fuel cell technology.',col:'#add8e6'},
-  Ag:{name:'Silver',     mass:107.9,  n:47,  grp:'Group 11 (Transition)',  grpNum:11, e:47,  val:1, give:1,  action:'gives',   use:'Jewellery, photography, electronics, antibacterial',bonds:'Cl, S, O, N', desc:'Best electrical conductor of all metals. Used in mirrors, photography (silver halides), and antimicrobial applications in wound dressings.',col:'#c0c0c0'},
-  Cd:{name:'Cadmium',    mass:112.4,  n:48,  grp:'Group 12 (Transition)',  grpNum:12, e:48,  val:2, give:2,  action:'gives',   use:'Nickel-cadmium batteries, pigments, nuclear control rods',bonds:'S, O, Cl', desc:'Toxic heavy metal. Used in rechargeable Ni-Cd batteries and as yellow/orange pigment. Naturally occurs with zinc ores.',col:'#add8e6'},
-  In:{name:'Indium',     mass:114.8,  n:49,  grp:'Group 13 (Post-Trans.)', grpNum:13, e:49,  val:3, give:3,  action:'gives',   use:'Touchscreens (ITO), LCD displays, solders',  bonds:'O, N, Cl, P',    desc:'Soft, silver-white metal. Indium tin oxide (ITO) is the transparent conductor on every touchscreen and LCD display.',col:'#dcdcdc'},
-  Sn:{name:'Tin',        mass:118.7,  n:50,  grp:'Group 14 (Post-Trans.)', grpNum:14, e:50,  val:4, give:0,  action:'shares',  use:'Solder, tin cans (steel coating), bronze alloy',bonds:'O, Cl, F, Pb',  desc:'One of the first metals known to humans. Alloyed with copper to make bronze, revolutionising ancient civilisation. "Tin" cans are actually steel coated with tin.',col:'#dcdcdc'},
-  Sb:{name:'Antimony',   mass:121.8,  n:51,  grp:'Group 15 (Metalloid)',   grpNum:15, e:51,  val:5, give:0,  action:'receives',use:'Flame retardants, lead-acid batteries, ancient cosmetics',bonds:'O, S, Cl', desc:'Used since antiquity as eye cosmetic (kohl). Today used as flame retardant and to harden lead in car batteries.',col:'#f0e68c'},
-  Te:{name:'Tellurium',  mass:127.6,  n:52,  grp:'Group 16 (Metalloid)',   grpNum:16, e:52,  val:6, give:0,  action:'receives',use:'Solar panels (CdTe), thermoelectrics, alloys',bonds:'H, O, C, Au',   desc:'Rare metalloid mainly obtained as a by-product of copper refining. Cadmium telluride (CdTe) thin-film solar panels are widely deployed.',col:'#f0e68c'},
-  I: {name:'Iodine',     mass:126.9,  n:53,  grp:'Group 17 (Halogen)',     grpNum:17, e:53,  val:7, give:0,  action:'receives',use:'Antiseptic (povidone-iodine), thyroid hormones, photography',bonds:'H, C, Na, Ag', desc:'Purple-grey solid that sublimes to violet gas. Essential for thyroid hormone production. Deficiency causes goitre. Used as antiseptic worldwide.',col:'#9b59b6'},
-  Xe:{name:'Xenon',      mass:131.3,  n:54,  grp:'Group 18 (Noble Gas)',   grpNum:18, e:54,  val:0, give:0,  action:'neutral', use:'Xenon headlights, flash photography, anaesthetic',bonds:'None (inert)',  desc:'Noble gas used in high-intensity arc lamps for cinema projectors and car headlights. First noble gas to form a chemical compound (XePtF₆).',col:'#dda0dd'},
-  Cs:{name:'Caesium',    mass:132.9,  n:55,  grp:'Group 1 (Alkali Metal)', grpNum:1,  e:55,  val:1, give:1,  action:'gives',   use:'Atomic clocks (GPS, internet timing), photoelectric cells',bonds:'O, Cl, F', desc:'Used in caesium atomic clocks — the international definition of one second is based on caesium-133 oscillations. Most reactive of the stable alkali metals.',col:'#ff9999'},
-  Ba:{name:'Barium',     mass:137.3,  n:56,  grp:'Group 2 (Alk. Earth)',   grpNum:2,  e:56,  val:2, give:2,  action:'gives',   use:'Barium meals (X-ray contrast), fireworks (green), pigments',bonds:'O, S, Cl, F', desc:'Gives green colour to fireworks. Barium sulfate is used as a contrast agent in X-ray imaging of the digestive system.',col:'#ffdead'},
-  La:{name:'Lanthanum',  mass:138.9,  n:57,  grp:'Period 6 (Lanthanide)',  grpNum:3,  e:57,  val:3, give:3,  action:'gives',   use:'Camera/telescope lenses, hybrid car batteries, catalysts',bonds:'O, F, Cl', desc:'First lanthanide. Used in high-refractive-index glass for camera lenses. Nickel-lanthanum hydride batteries used in Toyota Prius.',col:'#afeeee'},
-  Ce:{name:'Cerium',     mass:140.1,  n:58,  grp:'Period 6 (Lanthanide)',  grpNum:3,  e:58,  val:3, give:3,  action:'gives',   use:'Catalytic converters, lighter flints, glass polishing',bonds:'O, F, Cl, S',desc:'Most abundant lanthanide. Used in auto catalytic converters. Cerium oxide polishes glass and computer chip surfaces.',col:'#afeeee'},
-  Pr:{name:'Praseodymium',mass:140.9, n:59,  grp:'Period 6 (Lanthanide)',  grpNum:3,  e:59,  val:3, give:3,  action:'gives',   use:'Strong permanent magnets, aircraft engines, green glass',bonds:'O, F, Cl', desc:'Used in powerful neodymium-praseodymium magnets. Praseodymium oxide gives glass a distinctive yellow-green colour.',col:'#afeeee'},
-  Nd:{name:'Neodymium',  mass:144.2,  n:60,  grp:'Period 6 (Lanthanide)',  grpNum:3,  e:60,  val:3, give:3,  action:'gives',   use:'Strongest permanent magnets, headphones, wind turbines',bonds:'O, F, Cl', desc:'Makes the strongest permanent magnets known (Nd₂Fe₁₄B). These magnets are in every electric motor, hard drive, and loudspeaker.',col:'#afeeee'},
-  Pm:{name:'Promethium', mass:145,    n:61,  grp:'Period 6 (Lanthanide)',  grpNum:3,  e:61,  val:3, give:3,  action:'gives',   use:'Nuclear batteries (pacemakers), luminous paint',bonds:'O, Cl, F',       desc:'Only radioactive lanthanide with no stable isotopes. Was once used in self-powered luminous paint for watches.',col:'#afeeee'},
-  Sm:{name:'Samarium',   mass:150.4,  n:62,  grp:'Period 6 (Lanthanide)',  grpNum:3,  e:62,  val:3, give:3,  action:'gives',   use:'Samarium-cobalt magnets, cancer treatment, neutron capture',bonds:'O, F, Cl', desc:'Forms strong permanent magnets (SmCo) that work at high temperatures. Samarium-153 used in targeted cancer therapy.',col:'#afeeee'},
-  Eu:{name:'Europium',   mass:152.0,  n:63,  grp:'Period 6 (Lanthanide)',  grpNum:3,  e:63,  val:3, give:3,  action:'gives',   use:'Red/blue phosphors in LEDs, Euro banknote security',bonds:'O, F, Cl',     desc:'Provides the red and blue colours in LED screens and fluorescent lamps. Used as a security feature in Euro banknotes due to its fluorescence.',col:'#afeeee'},
-  Gd:{name:'Gadolinium', mass:157.3,  n:64,  grp:'Period 6 (Lanthanide)',  grpNum:3,  e:64,  val:3, give:3,  action:'gives',   use:'MRI contrast agent, neutron shielding, phosphors',bonds:'O, F, Cl',     desc:'Used as MRI contrast agent (gadolinium chelates) to enhance soft tissue imaging. Highest neutron absorption cross-section of any element.',col:'#afeeee'},
-  Tb:{name:'Terbium',    mass:158.9,  n:65,  grp:'Period 6 (Lanthanide)',  grpNum:3,  e:65,  val:3, give:3,  action:'gives',   use:'Green phosphors in LEDs, sonar systems, fuel cells',bonds:'O, F, Cl',    desc:'Green phosphor in energy-efficient lighting. The magnetostrictive alloy Terfenol-D (containing terbium) is used in sonar systems.',col:'#afeeee'},
-  Dy:{name:'Dysprosium', mass:162.5,  n:66,  grp:'Period 6 (Lanthanide)',  grpNum:3,  e:66,  val:3, give:3,  action:'gives',   use:'Neodymium magnets (heat resistance), nuclear reactors',bonds:'O, F, Cl',  desc:'Added to neodymium magnets to maintain performance at high temperatures. Critical for electric vehicle motors and wind turbine generators.',col:'#afeeee'},
-  Ho:{name:'Holmium',    mass:164.9,  n:67,  grp:'Period 6 (Lanthanide)',  grpNum:3,  e:67,  val:3, give:3,  action:'gives',   use:'Surgical lasers, nuclear reactor control, magnets',bonds:'O, F, Cl',    desc:'Highest magnetic moment of any element. Holmium:YAG lasers used in minimally invasive surgery for kidney stones and prostate.',col:'#afeeee'},
-  Er:{name:'Erbium',     mass:167.3,  n:68,  grp:'Period 6 (Lanthanide)',  grpNum:3,  e:68,  val:3, give:3,  action:'gives',   use:'Fibre optic amplifiers (EDFA), laser skin treatment',bonds:'O, F, Cl',    desc:'Erbium-doped fibre amplifiers (EDFAs) are fundamental to modern long-distance fibre optic internet communications.',col:'#afeeee'},
-  Tm:{name:'Thulium',    mass:168.9,  n:69,  grp:'Period 6 (Lanthanide)',  grpNum:3,  e:69,  val:3, give:3,  action:'gives',   use:'Portable X-ray devices, surgical lasers, blue phosphors',bonds:'O, F, Cl',   desc:'Rarest naturally occurring lanthanide. Radioactive Tm-170 used in portable X-ray machines that need no power source.',col:'#afeeee'},
-  Yb:{name:'Ytterbium',  mass:173.0,  n:70,  grp:'Period 6 (Lanthanide)',  grpNum:3,  e:70,  val:3, give:3,  action:'gives',   use:'Optical fibre lasers, atomic clocks, cancer therapy',bonds:'O, F, Cl',   desc:'Used in the world\'s most accurate atomic clocks. Ytterbium-doped fibre lasers used in industrial cutting and manufacturing.',col:'#afeeee'},
-  Lu:{name:'Lutetium',   mass:175.0,  n:71,  grp:'Period 6 (Lanthanide)',  grpNum:3,  e:71,  val:3, give:3,  action:'gives',   use:'PET scan detectors, cancer radiotherapy, catalyst',bonds:'O, F, Cl',   desc:'Densest and hardest lanthanide. Lutetium oxyorthosilicate (LSO) is the scintillator in PET scanners used to detect cancer.',col:'#afeeee'},
-  Hf:{name:'Hafnium',    mass:178.5,  n:72,  grp:'Group 4 (Transition)',   grpNum:4,  e:72,  val:4, give:0,  action:'shares',  use:'Nuclear reactor control rods, processor chips (HfO₂)',bonds:'O, N, Cl',  desc:'Almost always found with zirconium. Excellent neutron absorber used in nuclear control rods. HfO₂ is used as a gate dielectric in modern Intel chips.',col:'#add8e6'},
-  Ta:{name:'Tantalum',   mass:180.9,  n:73,  grp:'Group 5 (Transition)',   grpNum:5,  e:73,  val:5, give:0,  action:'shares',  use:'Capacitors in phones/laptops, surgical implants, jet engines',bonds:'O, N, C', desc:'Found in tantalite ore (coltan) — mined in conflict zones for electronics capacitors in every smartphone and laptop.',col:'#add8e6'},
-  W: {name:'Tungsten',   mass:183.8,  n:74,  grp:'Group 6 (Transition)',   grpNum:6,  e:74,  val:6, give:0,  action:'shares',  use:'Light bulb filaments, cutting tools, armour-piercing rounds',bonds:'O, C, N', desc:'Highest melting point of all metals (3422°C). Used in incandescent light bulb filaments. Hardest natural metal when alloyed as tungsten carbide.',col:'#add8e6'},
-  Re:{name:'Rhenium',    mass:186.2,  n:75,  grp:'Group 7 (Transition)',   grpNum:7,  e:75,  val:7, give:0,  action:'shares',  use:'Jet engine superalloys, catalytic reforming, filaments',bonds:'O, N, Cl',  desc:'Second-highest melting point of all elements. Critical in single-crystal superalloys for jet turbine blades that operate above 1000°C.',col:'#add8e6'},
-  Os:{name:'Osmium',     mass:190.2,  n:76,  grp:'Group 8 (Transition)',   grpNum:8,  e:76,  val:4, give:0,  action:'shares',  use:'Fountain pen nibs, electrical contacts, catalysts',bonds:'O, N, F',    desc:'Densest naturally occurring element (22.59 g/cm³). Extremely hard. OsO₄ used as a biological stain in electron microscopy.',col:'#add8e6'},
-  Ir:{name:'Iridium',    mass:192.2,  n:77,  grp:'Group 9 (Transition)',   grpNum:9,  e:77,  val:3, give:0,  action:'shares',  use:'Spark plugs, crucibles, hardening platinum jewellery',bonds:'O, Cl, N',   desc:'Second densest element. Most corrosion-resistant metal. The iridium anomaly in geological strata is evidence for the asteroid that killed the dinosaurs.',col:'#add8e6'},
-  Pt:{name:'Platinum',   mass:195.1,  n:78,  grp:'Group 10 (Transition)',  grpNum:10, e:78,  val:2, give:0,  action:'shares',  use:'Catalytic converters, fuel cells, cancer drugs (cisplatin)',bonds:'O, N, Cl, S', desc:'Rare, unreactive metal. Catalytic converters use platinum to convert toxic exhaust gases. Cisplatin (a platinum compound) treats several cancers.',col:'#add8e6'},
-  Au:{name:'Gold',       mass:197.0,  n:79,  grp:'Group 11 (Transition)',  grpNum:11, e:79,  val:1, give:1,  action:'gives',   use:'Jewellery, electronics contacts, medicine, dentistry',bonds:'Cl, Br, CN, S',desc:'Most unreactive metal. Does not tarnish or corrode. Used in electronics for non-corroding contacts. Gold nanoparticles used in medical diagnostics.',col:'#FFD700'},
-  Hg:{name:'Mercury',    mass:200.6,  n:80,  grp:'Group 12 (Transition)',  grpNum:12, e:80,  val:2, give:2,  action:'gives',   use:'Thermometers (legacy), fluorescent lamps, gold mining',bonds:'Cl, S, O, N',  desc:'Only metal liquid at room temperature. Highly toxic — causes neurological damage. Used in fluorescent lighting. Now largely phased out due to toxicity.',col:'#add8e6'},
-  Tl:{name:'Thallium',   mass:204.4,  n:81,  grp:'Group 13 (Post-Trans.)', grpNum:13, e:81,  val:3, give:3,  action:'gives',   use:'Infrared detectors, cardiac imaging, historically a poison',bonds:'O, Cl, S, F', desc:'Extremely toxic heavy metal. Used in infrared detectors and as a medical tracer in cardiac stress tests. Was once used as a rat poison and murder weapon.',col:'#dcdcdc'},
-  Pb:{name:'Lead',       mass:207.2,  n:82,  grp:'Group 14 (Post-Trans.)', grpNum:14, e:82,  val:2, give:2,  action:'gives',   use:'Batteries, radiation shielding, historical pipes/paint',bonds:'O, S, Cl, F',  desc:'Dense, toxic heavy metal. Lead-acid batteries power car starters. Used for X-ray and gamma ray shielding. Lead paint and pipes caused widespread poisoning historically.',col:'#dcdcdc'},
-  Bi:{name:'Bismuth',    mass:209.0,  n:83,  grp:'Group 15 (Post-Trans.)', grpNum:15, e:83,  val:3, give:3,  action:'gives',   use:'Pepto-Bismol, cosmetics, low-melt alloys, shotgun pellets',bonds:'O, Cl, S, N', desc:'The heaviest non-radioactive element (just barely). Has beautiful iridescent oxide crystals. Bismuth subsalicylate is the active ingredient in Pepto-Bismol.',col:'#dcdcdc'},
-  Po:{name:'Polonium',   mass:209,    n:84,  grp:'Group 16 (Metalloid)',   grpNum:16, e:84,  val:6, give:0,  action:'receives',use:'Nuclear power sources, anti-static devices, atomic weapons triggers',bonds:'H, O, Cl', desc:'Highly radioactive. Discovered by Marie Curie. Used in nuclear weapon triggers. Was used to assassinate Alexander Litvinenko in London (2006).',col:'#f0e68c'},
-  At:{name:'Astatine',   mass:210,    n:85,  grp:'Group 17 (Halogen)',     grpNum:17, e:85,  val:7, give:0,  action:'receives',use:'Cancer radiotherapy (targeted alpha therapy)',bonds:'H, C, I',       desc:'Rarest naturally occurring element — only ~25 grams exist on Earth at any time. Radioactive halogen. Promising for targeted cancer radiotherapy.',col:'#f0e68c'},
-  Rn:{name:'Radon',      mass:222,    n:86,  grp:'Group 18 (Noble Gas)',   grpNum:18, e:86,  val:0, give:0,  action:'neutral', use:'Radon-222 used in cancer radiotherapy',      bonds:'None (inert)',    desc:'Radioactive noble gas. Natural seepage from uranium-bearing rocks accumulates in basements. Second-leading cause of lung cancer after smoking.',col:'#dda0dd'},
-  Fr:{name:'Francium',   mass:223,    n:87,  grp:'Group 1 (Alkali Metal)', grpNum:1,  e:87,  val:1, give:1,  action:'gives',   use:'Research only — no practical uses due to extreme rarity',bonds:'None practical', desc:'Most unstable of all naturally occurring elements. At most 30 grams exist on Earth at any given moment. Most reactive alkali metal.',col:'#ff9999'},
-  Ra:{name:'Radium',     mass:226,    n:88,  grp:'Group 2 (Alk. Earth)',   grpNum:2,  e:88,  val:2, give:2,  action:'gives',   use:'Historical cancer treatment, luminous paint (banned)',bonds:'O, Cl, S, F',  desc:'Discovered by Marie Curie. Highly radioactive. Once used in "Radium Girls" self-luminous watch paint, causing bone cancer. Now replaced by safer alternatives.',col:'#ffdead'},
-  Ac:{name:'Actinium',   mass:227,    n:89,  grp:'Period 7 (Actinide)',    grpNum:3,  e:89,  val:3, give:3,  action:'gives',   use:'Neutron source, cancer therapy (Ac-225)',     bonds:'O, F, Cl',       desc:'Highly radioactive. Gives off a blue glow in the dark due to ionisation of surrounding air. Actinium-225 is a promising targeted alpha therapy cancer treatment.',col:'#c8f7c5'},
-  Th:{name:'Thorium',    mass:232.0,  n:90,  grp:'Period 7 (Actinide)',    grpNum:3,  e:90,  val:4, give:4,  action:'gives',   use:'Nuclear fuel (molten salt reactors), lantern mantles',bonds:'O, F, Cl, N',  desc:'Weakly radioactive. Proposed as a safer alternative nuclear fuel — thorium reactors produce far less long-lived waste than uranium reactors.',col:'#c8f7c5'},
-  Pa:{name:'Protactinium',mass:231.0, n:91,  grp:'Period 7 (Actinide)',    grpNum:3,  e:91,  val:5, give:5,  action:'gives',   use:'Research only — no significant commercial use',bonds:'O, F, Cl',       desc:'Rare, radioactive, and highly toxic actinide. Intermediate in uranium decay. No practical uses yet identified beyond research.',col:'#c8f7c5'},
-  U: {name:'Uranium',    mass:238.0,  n:92,  grp:'Period 7 (Actinide)',    grpNum:3,  e:92,  val:6, give:6,  action:'gives',   use:'Nuclear fuel (power + weapons), radiation shielding',bonds:'O, F, Cl, N',  desc:'Heaviest naturally occurring element. U-235 undergoes fission in nuclear reactors. Depleted uranium (U-238) used in armour-piercing ammunition and radiation shielding.',col:'#c8f7c5'},
-  Np:{name:'Neptunium',  mass:237,    n:93,  grp:'Period 7 (Actinide)',    grpNum:3,  e:93,  val:5, give:5,  action:'gives',   use:'Neutron detection, research, nuclear batteries',bonds:'O, F, Cl',      desc:'First transuranic element (beyond uranium). Trace amounts form naturally from uranium decay. Np-237 used in neutron detection devices.',col:'#c8f7c5'},
-  Pu:{name:'Plutonium',  mass:244,    n:94,  grp:'Period 7 (Actinide)',    grpNum:3,  e:94,  val:4, give:4,  action:'gives',   use:'Nuclear weapons, space power (RTGs), MOX fuel',bonds:'O, F, Cl, N',   desc:'Fissile material used in nuclear warheads. Pu-238 powers spacecraft via radioisotope thermoelectric generators (RTGs) — used in Voyager, Cassini, and Curiosity.',col:'#c8f7c5'},
-  Am:{name:'Americium',  mass:243,    n:95,  grp:'Period 7 (Actinide)',    grpNum:3,  e:95,  val:3, give:3,  action:'gives',   use:'Smoke detectors (Am-241), cancer treatment, research',bonds:'O, F, Cl',     desc:'Used in almost every household smoke detector. Am-241 emits alpha particles that ionise air, completing a circuit that breaks when smoke is present.',col:'#c8f7c5'},
-  Cm:{name:'Curium',     mass:247,    n:96,  grp:'Period 7 (Actinide)',    grpNum:3,  e:96,  val:3, give:3,  action:'gives',   use:'Alpha particle X-ray spectrometers on Mars rovers',bonds:'O, F, Cl',     desc:'Named after Marie and Pierre Curie. Used in Alpha Particle X-Ray Spectrometers (APXS) on Mars rovers to analyse rock and soil composition.',col:'#c8f7c5'},
-  Bk:{name:'Berkelium',  mass:247,    n:97,  grp:'Period 7 (Actinide)',    grpNum:3,  e:97,  val:3, give:3,  action:'gives',   use:'Research only — produced in microgram quantities',bonds:'O, F, Cl',      desc:'Produced in nuclear reactors in microgram amounts. Named after Berkeley, California. Used only for research and as a target to synthesise heavier elements.',col:'#c8f7c5'},
-  Cf:{name:'Californium',mass:251,    n:98,  grp:'Period 7 (Actinide)',    grpNum:3,  e:98,  val:3, give:3,  action:'gives',   use:'Portable neutron source, oil well logging, cancer treatment',bonds:'O, F, Cl',  desc:'Powerful neutron emitter. Used to detect gold and silver ores in mines, and to treat certain cancers via neutron brachytherapy.',col:'#c8f7c5'},
-  Es:{name:'Einsteinium',mass:252,    n:99,  grp:'Period 7 (Actinide)',    grpNum:3,  e:99,  val:3, give:3,  action:'gives',   use:'Research only — first observed in Ivy Mike H-bomb fallout',bonds:'O, F',         desc:'Discovered in fallout from the first hydrogen bomb test (1952). Named after Einstein. Available only in nanogram amounts for research.',col:'#c8f7c5'},
-  Fm:{name:'Fermium',    mass:257,    n:100, grp:'Period 7 (Actinide)',    grpNum:3,  e:100, val:3, give:3,  action:'gives',   use:'Research only — no practical applications',bonds:'None practical',  desc:'Also discovered in the Ivy Mike thermonuclear test fallout. Heaviest element that can be produced in a nuclear reactor by neutron bombardment.',col:'#c8f7c5'},
-  Md:{name:'Mendelevium',mass:258,    n:101, grp:'Period 7 (Actinide)',    grpNum:3,  e:101, val:3, give:3,  action:'gives',   use:'Research only — produced atom by atom',bonds:'None practical',    desc:'Named after Dmitri Mendeleev who created the periodic table. Synthesised one atom at a time. First element produced by bombarding a target with helium ions.',col:'#c8f7c5'},
-  No:{name:'Nobelium',   mass:259,    n:102, grp:'Period 7 (Actinide)',    grpNum:3,  e:102, val:2, give:2,  action:'gives',   use:'Research only — half-life of 58 minutes (No-259)',bonds:'None practical',  desc:'Named after Alfred Nobel. Has an unusually stable +2 oxidation state compared to other actinides. Only studied in sub-microgram quantities.',col:'#c8f7c5'},
-  Lr:{name:'Lawrencium', mass:266,    n:103, grp:'Period 7 (Actinide)',    grpNum:3,  e:103, val:3, give:3,  action:'gives',   use:'Research only — last actinide element',bonds:'None practical',   desc:'Named after Ernest Lawrence (inventor of the cyclotron). Last of the actinide series. Studies suggest it may have an anomalous electron configuration.',col:'#c8f7c5'},
-  Rf:{name:'Rutherfordium',mass:267,  n:104, grp:'Group 4 (Trans-Actinide)',grpNum:4, e:104, val:4, give:0,  action:'shares',  use:'Research only — superheavy element',bonds:'None practical',    desc:'Named after Ernest Rutherford. First transactinide element. Extremely unstable — longest-lived isotope has a half-life of just 78 seconds.',col:'#add8e6'},
-  Db:{name:'Dubnium',    mass:268,    n:105, grp:'Group 5 (Trans-Actinide)',grpNum:5, e:105, val:5, give:0,  action:'shares',  use:'Research only',bonds:'None practical',               desc:'Named after Dubna, Russia. Synthesised in both the Soviet Union and Berkeley. Longest-lived isotope has a half-life of about 16 hours.',col:'#add8e6'},
-  Sg:{name:'Seaborgium', mass:269,    n:106, grp:'Group 6 (Trans-Actinide)',grpNum:6, e:106, val:6, give:0,  action:'shares',  use:'Research only',bonds:'None practical',               desc:'Named after Glenn T. Seaborg — the only person to have an element named after them during their lifetime.',col:'#add8e6'},
-  Bh:{name:'Bohrium',    mass:270,    n:107, grp:'Group 7 (Trans-Actinide)',grpNum:7, e:107, val:7, give:0,  action:'shares',  use:'Research only',bonds:'None practical',               desc:'Named after Niels Bohr. Longer-lived isotopes allow researchers to study its chemistry — it behaves as expected for group 7.',col:'#add8e6'},
-  Hs:{name:'Hassium',    mass:277,    n:108, grp:'Group 8 (Trans-Actinide)',grpNum:8, e:108, val:4, give:0,  action:'shares',  use:'Research only',bonds:'None practical',               desc:'Named after the German state of Hesse. Experiments show it forms HsO₄, analogous to OsO₄, confirming periodic table predictions for group 8.',col:'#add8e6'},
-  Mt:{name:'Meitnerium', mass:278,    n:109, grp:'Group 9 (Trans-Actinide)',grpNum:9, e:109, val:3, give:0,  action:'shares',  use:'Research only',bonds:'None practical',               desc:'Named after physicist Lise Meitner who co-discovered nuclear fission. Too unstable for any practical use.',col:'#add8e6'},
-  Ds:{name:'Darmstadtium',mass:281,   n:110, grp:'Group 10 (Trans-Actinide)',grpNum:10,e:110, val:2, give:0, action:'shares',  use:'Research only',bonds:'None practical',               desc:'Named after Darmstadt, Germany. Predicted to be a noble-metal-like solid if enough could be produced.',col:'#add8e6'},
-  Rg:{name:'Roentgenium',mass:282,    n:111, grp:'Group 11 (Trans-Actinide)',grpNum:11,e:111, val:1, give:0, action:'shares',  use:'Research only',bonds:'None practical',               desc:'Named after Wilhelm Röntgen, discoverer of X-rays. Predicted to have chemical properties similar to gold.',col:'#add8e6'},
-  Cn:{name:'Copernicium',mass:285,    n:112, grp:'Group 12 (Trans-Actinide)',grpNum:12,e:112, val:2, give:0, action:'shares',  use:'Research only',bonds:'None practical',               desc:'Named after Nicolaus Copernicus. Relativistic effects are so strong in Cn that it may behave as a noble gas rather than a metal.',col:'#add8e6'},
-  Nh:{name:'Nihonium',   mass:286,    n:113, grp:'Group 13 (Trans-Actinide)',grpNum:13,e:113, val:3, give:0, action:'shares',  use:'Research only',bonds:'None practical',               desc:'Named after Japan (Nihon in Japanese) — first element discovered in Asia. Synthesised at RIKEN institute. Four atoms confirmed in 2004.',col:'#dcdcdc'},
-  Fl:{name:'Flerovium',  mass:289,    n:114, grp:'Group 14 (Trans-Actinide)',grpNum:14,e:114, val:4, give:0, action:'shares',  use:'Research only',bonds:'None practical',               desc:'Named after Flerov Laboratory in Dubna. Predicted by relativistic calculations to behave more like a noble gas than a group 14 metal like lead.',col:'#dcdcdc'},
-  Mc:{name:'Moscovium',  mass:290,    n:115, grp:'Group 15 (Trans-Actinide)',grpNum:15,e:115, val:3, give:0, action:'shares',  use:'Research only',bonds:'None practical',               desc:'Named after Moscow Oblast, Russia. Synthesised at Dubna. Decays in milliseconds. Its decay chain produces nihonium.',col:'#dcdcdc'},
-  Lv:{name:'Livermorium',mass:293,    n:116, grp:'Group 16 (Trans-Actinide)',grpNum:16,e:116, val:2, give:0, action:'shares',  use:'Research only',bonds:'None practical',               desc:'Named after Lawrence Livermore National Laboratory. Predicted to have unusual chemistry due to strong relativistic effects.',col:'#dcdcdc'},
-  Ts:{name:'Tennessine', mass:294,    n:117, grp:'Group 17 (Trans-Actinide)',grpNum:17,e:117, val:1, give:0, action:'shares',  use:'Research only',bonds:'None practical',               desc:'Named after Tennessee, USA. Second-heaviest confirmed element. So heavy that relativistic effects may make it behave unlike other halogens.',col:'#f0e68c'},
-  Og:{name:'Oganesson',  mass:294,    n:118, grp:'Group 18 (Trans-Actinide)',grpNum:18,e:118, val:0, give:0, action:'neutral', use:'Research only — heaviest confirmed element',bonds:'Possibly some',   desc:'Named after nuclear physicist Yuri Oganessian. Heaviest known element. Relativistic calculations suggest it may not actually be a noble gas — it might form compounds.',col:'#dda0dd'},
-  D: {name:'Deuterium',  mass:2.014,  n:1,   grp:'Hydrogen Isotope',       grpNum:1,  e:1,   val:1, give:1,  action:'gives',   use:'Heavy water nuclear reactors, nuclear fusion fuel', bonds:'O, N, C',     desc:'Stable isotope of hydrogen with one neutron. Used in deuterium-labelled compounds for research. Heavy water (D₂O) used to moderate neutrons in some nuclear reactors.',col:'#a8d8ea'},
-};
-
-const GROUP_ROMAN = ['','I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII','XIII','XIV','XV','XVI','XVII','XVIII'];
-const ACTION_COLOR = {gives:'#856404', receives:'#0c5460', shares:'#383d41', neutral:'#555'};
-const ACTION_BG    = {gives:'#fff3cd', receives:'#d1ecf1', shares:'#e2e3e5', neutral:'#f8f9fa'};
-const GROUP_COLOR  = {
-  1:'#e74c3c',2:'#e67e22',3:'#3498db',4:'#2980b9',5:'#1a6fb5',6:'#1560a0',
-  7:'#0d4f8b',8:'#0d4f8b',9:'#0d4f8b',10:'#0d4f8b',11:'#f39c12',12:'#d68910',
-  13:'#7f8c8d',14:'#95a5a6',15:'#27ae60',16:'#16a085',17:'#8e44ad',18:'#6c3483'
-};
-
-const ELEM_COLORS = Object.fromEntries(Object.entries(ED).map(([k,v])=>[k,v.col]));
-function elemColor(s){return ELEM_COLORS[s]||'#b0c4de';}
-
-// ════════════════════════════════════
-// NAVIGATION
-// ════════════════════════════════════
-function goToLab(){hide('home-page');show('table-page');document.getElementById('rotary-trigger').classList.add('visible');}
-function goToHome(){hideAll();show('home-page');document.getElementById('rotary-trigger').classList.remove('visible');closePanel();closeCard();}
-function switchToTable(){hideAll();show('table-page');closePanel();}
-function switchToAtomLab(){hideAll();show('lab-page');closePanel();initLabPage();}
-function show(id){document.getElementById(id).classList.remove('hidden');}
-function hide(id){document.getElementById(id).classList.add('hidden');}
-function hideAll(){['home-page','table-page','lab-page'].forEach(hide);}
-
-// ════════════════════════════════════
-// ROTARY PANEL
-// ════════════════════════════════════
-let panelOpen=false;
-function togglePanel(){
-  panelOpen=!panelOpen;
-  document.getElementById('rotary-panel').classList.toggle('open',panelOpen);
-  if(panelOpen){const l=document.querySelector('.panel-logo');l.style.animation='none';void l.offsetWidth;l.style.animation='panel-spin 1.4s ease-out forwards';}
-}
-function closePanel(){panelOpen=false;document.getElementById('rotary-panel').classList.remove('open');}
-
-// ════════════════════════════════════
-// PERIOD + GROUP LABELS
-// ════════════════════════════════════
-window.addEventListener('DOMContentLoaded',()=>{
-  // Group labels I–XVIII
-  const glRow=document.getElementById('groupLabelRow');
-  for(let g=1;g<=18;g++){
-    const d=document.createElement('div');
-    d.className='group-lbl';
-    d.textContent=GROUP_ROMAN[g];
-    d.style.color=GROUP_COLOR[g]||'var(--gold-dark)';
-    glRow.appendChild(d);
-  }
-  // Period labels 1–7 + spacer for lanthanides/actinides
-  const pl=document.getElementById('periodLabels');
-  ['1','2','3','4','5','6','7','','8*','9*'].forEach((p,i)=>{
-    const d=document.createElement('div');
-    if(p===''){d.className='period-lbl spacer-lbl';d.style.height='8px';}
-    else{
-      d.className='period-lbl';
-      d.textContent=p?`Period ${p}`:'';
-      d.style.fontSize='.58em';
-    }
-    pl.appendChild(d);
-  });
-  initPeriodicTable();
-});
-
-// ════════════════════════════════════
-// 3D CARD
-// ════════════════════════════════════
-let cardActive=false;
-function showElementCard(sym,tdEl){
-  const d=ED[sym];
-  if(!d){
-    // Unknown element — show minimal card
-    showUnknownCard(sym,tdEl);return;
-  }
-  cardActive=true;
-  document.getElementById('card-atomic-num').textContent=d.n;
-  document.getElementById('card-symbol').textContent=sym;
-  document.getElementById('card-mass').textContent=d.mass;
-  document.getElementById('card-name').textContent=d.name;
-  document.getElementById('card-group-tag').textContent=d.grp;
-  document.getElementById('card-use').textContent=d.use;
-  document.getElementById('card-valence').textContent=
-    d.val===0?'0 — outer shell is already full (stable)':
-    `${d.val} valence electron${d.val!==1?'s':''} — needs ${8-d.val} more to complete outer shell`;
-  document.getElementById('card-bonds').textContent=d.bonds;
-  document.getElementById('card-desc').textContent=d.desc;
-
-  // Electron dots
-  const ring=document.getElementById('card-electrons');
-  ring.innerHTML='';
-  const total=Math.min(d.e,20);
-  for(let i=0;i<total;i++){
-    const dot=document.createElement('span');
-    dot.className='e-dot'+(i>=total-d.val&&d.val>0?' valence':'');
-    ring.appendChild(dot);
-  }
-  if(d.e>20){
-    const more=document.createElement('span');
-    more.style.cssText='font-size:.62em;color:#888;';
-    more.textContent=`+${d.e-20} more`;
-    ring.appendChild(more);
-  }
-
-  document.getElementById('elem-card').style.borderColor=d.col;
-  document.getElementById('elem-card').style.boxShadow=`0 24px 60px rgba(0,0,0,.22),0 0 0 2px ${d.col}`;
-
-  const wrap=document.getElementById('elem-card-wrap');
-  wrap.classList.add('active');
-  const rect=tdEl.getBoundingClientRect();
-  const cw=330,ch=500;
-  let x=rect.right+12,y=rect.top;
-  if(x+cw>window.innerWidth-8)x=rect.left-cw-12;
-  y=Math.max(8,Math.min(y,window.innerHeight-ch-8));
-  wrap.style.left=x+'px';wrap.style.top=y+'px';
-}
-
-function showUnknownCard(sym,tdEl){
-  cardActive=true;
-  document.getElementById('card-atomic-num').textContent='?';
-  document.getElementById('card-symbol').textContent=sym;
-  document.getElementById('card-mass').textContent='?';
-  document.getElementById('card-name').textContent='Unknown / Synthetic';
-  document.getElementById('card-group-tag').textContent='Superheavy';
-  document.getElementById('card-use').textContent='Research only or not yet characterised';
-  document.getElementById('card-valence').textContent='Unknown';
-  document.getElementById('card-bonds').textContent='None known';
-  document.getElementById('card-desc').textContent='This element has not yet been fully characterised, or exists only briefly as a synthetic superheavy element produced in particle accelerators.';
-  document.getElementById('card-electrons').innerHTML='';
-  const wrap=document.getElementById('elem-card-wrap');
-  wrap.classList.add('active');
-  const rect=tdEl.getBoundingClientRect();
-  const x=Math.min(rect.right+12,window.innerWidth-340);
-  const y=Math.max(8,Math.min(rect.top,window.innerHeight-500));
-  wrap.style.left=x+'px';wrap.style.top=y+'px';
-}
-
-function closeCard(){
-  cardActive=false;
-  document.getElementById('elem-card-wrap').classList.remove('active');
-  document.getElementById('periodic').classList.remove('blur-others');
-  document.querySelectorAll('#periodic td.hovered').forEach(t=>t.classList.remove('hovered'));
-}
-
-document.addEventListener('mousemove',e=>{
-  if(!cardActive)return;
-  const wrap=document.getElementById('elem-card-wrap');
-  const card=document.getElementById('elem-card');
-  const rect=wrap.getBoundingClientRect();
-  const dx=e.clientX-(rect.left+rect.width/2);
-  const dy=e.clientY-(rect.top+rect.height/2);
-  const rotY=Math.max(-20,Math.min(20,(dx/rect.width)*38));
-  const rotX=Math.max(-16,Math.min(16,-(dy/rect.height)*28));
-  const tx=Math.max(-12,Math.min(12,dx*.045));
-  const ty=Math.max(-8,Math.min(8,dy*.035));
-  card.style.transform=`rotateY(${rotY}deg) rotateX(${rotX}deg) translate(${tx}px,${ty}px)`;
-});
-
-// ════════════════════════════════════
-// PERIODIC TABLE INIT
-// ════════════════════════════════════
-function initPeriodicTable(){
-  const ec=(typeof elem_count!=='undefined')?elem_count:[];
-  const id_data=(typeof ids_by_elems!=='undefined')?ids_by_elems:{};
-  let show_pics=true,show15=false;
-  const elements=['H','He','Li','Be','B','C','N','O','F','Ne','Na','Mg','Al','Si','P','S','Cl','Ar','K','Ca','Sc','Ti','V','Cr','Mn','Fe','Co','Ni','Cu','Zn','Ga','Ge','As','Se','Br','Kr','Rb','Sr','Y','Zr','Nb','Mo','Tc','Ru','Rh','Pd','Ag','Cd','In','Sn','Sb','Te','I','Xe','Cs','Ba','La','Ce','Pr','Nd','Pm','Sm','Eu','Gd','Tb','Dy','Ho','Er','Tm','Yb','Lu','Hf','Ta','W','Re','Os','Ir','Pt','Au','Hg','Tl','Pb','Bi','Po','At','Rn','Fr','Ra','Ac','Th','Pa','U','Np','Pu','Am','Cm','Bk','Cf','Es','Fm','Md','No','Lr','Rf','Db','Sg','Bh','Hs','Mt','Ds','Rg','Cn','Nh','Fl','Mc','Lv','Ts','Og','D','X'];
-  const state=elements.map(()=>false);
-  const PDB='https://www.rcsb.org/structure/';
-  const imgLink=id=>`https://cdn.rcsb.org/images/structures/${id}_model-1.jpeg`;
-  const contains=(k,ns)=>ns.every(n=>k.indexOf(n)!==-1);
-
-  function toggleElem(td){
-    const n=elements.indexOf(td.id);if(n===-1)return;
-    state[n]=!state[n];td.classList.toggle('sel',state[n]);updatePDB();
-  }
-  function updatePDB(){
-    const desc=document.getElementById('desc-box');
-    const etds=document.getElementById('examples')?.getElementsByTagName('td');
-    const names=[],padded=[];
-    elements.forEach((e,i)=>{if(state[i]){names.push(e);padded.push(e.length===1?e+'_':e);}});
-    if(!names.length){if(desc)desc.innerHTML='Select an element to see its details — or click multiple to search PDB entries.';if(etds)[...etds].forEach(t=>setupEx(t,null));return;}
-    const key=padded.join(''),exact=id_data[key],only=exact?exact[0]:0;
-    let codes=only>0?exact.slice(1):[],incl=0;
-    for(const k in id_data){if(contains(k,padded)){incl+=id_data[k][0];if(codes.length<15&&k!==key)codes.push(...id_data[k].slice(1,16));}}
-    if(desc)desc.innerHTML=`<b>Selected:</b> ${names.join(', ')} &nbsp;|&nbsp; <b>PDB entries:</b> ${incl} &nbsp;|&nbsp; <b>Only these elements:</b> ${only}`;
-    if(etds)[...etds].forEach((t,i)=>setupEx(t,codes[i]));
-  }
-  function setupEx(td,code){
-    if(code){td.innerHTML=`<a href="${PDB+code}" target="_blank">${code}</a>`;td.style.backgroundImage=show_pics?`url(${imgLink(code)})`:''}
-    else{td.innerHTML='×';td.style.backgroundImage='';}
-  }
-  function cfColor(c){if(c<1)return null;if(c<10)return'#fdfde4';if(c<100)return'#fff8a0';if(c<1000)return'#ffe866';if(c<10000)return'#ff9933';return'#cc4411';}
-
-  const cells=document.getElementById('periodic').getElementsByTagName('td');
-  [...cells].forEach(c=>{
-    if(c.classList.contains('empty'))return;
-    const col=cfColor((ec||[])[elements.indexOf(c.id)]);
-    if(col)c.style.backgroundColor=col;
-    c.addEventListener('click',()=>{
-      document.getElementById('periodic').classList.add('blur-others');
-      document.querySelectorAll('#periodic td.hovered').forEach(t=>t.classList.remove('hovered'));
-      c.classList.add('hovered');
-      showElementCard(c.id,c);
-      toggleElem(c);
-    });
-  });
-
-  document.getElementById('show5').onclick=()=>{show15=false;upd515();};
-  document.getElementById('show15').onclick=()=>{show15=true;upd515();};
-  document.getElementById('showPics').onclick=()=>{show_pics=!show_pics;document.getElementById('showPics').className=show_pics?'on':'';updatePDB();};
-  document.getElementById('table-page').addEventListener('click',e=>{
-    if(e.target.classList.contains('empty')||e.target===document.getElementById('table-page'))closeCard();
-  });
-  function upd515(){
-    document.getElementById('show5').className=show15?'':'on';
-    document.getElementById('show15').className=show15?'on':'';
-    document.getElementById('examples').className=show15?'':'hide_optional';
-  }
-}
-
-// ════════════════════════════════════
-// EQUATION PARSER + VALIDATOR
-// ════════════════════════════════════
-function parseFormulaCounts(f){
-  const res={};
-  const re=/([A-Z][a-z]?)(\d*)/g;let m;
-  while((m=re.exec(f))!==null)if(m[1])res[m[1]]=(res[m[1]]||0)+(parseInt(m[2])||1);
-  return res;
-}
-function parseEquation(eq){
-  const clean=eq.replace(/\s+/g,'').replace(/[→＞]|->/g,'=');
-  const sides=clean.split('=');if(sides.length!==2)return null;
-  function parseSide(s){
-    const parts=s.split('+');const total={};
-    for(const p of parts){
-      const m=p.match(/^(\d*)([A-Za-z][A-Za-z0-9]*)$/);if(!m)return null;
-      const coeff=parseInt(m[1])||1;
-      Object.entries(parseFormulaCounts(m[2])).forEach(([el,n])=>{total[el]=(total[el]||0)+coeff*n;});
-    }
-    return total;
-  }
-  const r=parseSide(sides[0]),p=parseSide(sides[1]);
-  if(!r||!p)return null;
-  return{reactants:r,products:p};
-}
-function isBalanced(eq){
-  const parsed=parseEquation(eq);
-  if(!parsed)return{ok:false,msg:'Could not parse — use format: 2H2 + O2 → 2H2O'};
-  const allEls=new Set([...Object.keys(parsed.reactants),...Object.keys(parsed.products)]);
-  for(const el of allEls){
-    const rv=parsed.reactants[el]||0,pv=parsed.products[el]||0;
-    if(rv!==pv)return{ok:false,msg:`❌ ${el} not balanced: ${rv} on left, ${pv} on right`};
-  }
-  return{ok:true,msg:'✅ Balanced! Ready to build.'};
-}
-function liveEqCheck(){
-  const val=document.getElementById('eqInput').value.trim();
-  const status=document.getElementById('eqStatus');
-  const inp=document.getElementById('eqInput');
-  if(!val){status.innerHTML='';inp.className='eq-input';return;}
-  const res=isBalanced(val);
-  inp.className='eq-input '+(res.ok?'valid':'invalid');
-  status.innerHTML=`<span class="eq-status ${res.ok?'ok':'err'}">${res.msg}</span>`;
-}
-function validateAndStart(){
-  const val=document.getElementById('eqInput').value.trim();
-  if(!val){document.getElementById('eqStatus').innerHTML='<span class="eq-status err">Please enter an equation first.</span>';return;}
-  const res=isBalanced(val);
-  if(!res.ok){document.getElementById('eqStatus').innerHTML=`<span class="eq-status err">${res.msg}</span>`;return;}
-  window.targetEquation=parseEquation(val);
-  window.targetEqStr=val;
-  buildElectronSidebar();
-  startLab(val);
-}
-
-// ════════════════════════════════════
-// ELECTRON SIDEBAR
-// ════════════════════════════════════
-function buildElectronSidebar(){
-  const sidebar=document.getElementById('electron-sidebar');
-  const cardsDiv=document.getElementById('sidebarCards');
-  cardsDiv.innerHTML='';
-
-  // Gather unique elements from compounds
-  const seen=new Set();
-  labCompounds.forEach(c=>{
-    Object.keys(parseFormulaCounts(c.formula)).forEach(s=>{
-      if(!seen.has(s)){seen.add(s);buildElemElectronCard(s,cardsDiv);}
-    });
-  });
-
-  sidebar.classList.add('visible');
-}
-
-function buildElemElectronCard(sym,container){
-  const d=ED[sym];
-  if(!d)return;
-  const card=document.createElement('div');
-  card.className='elem-electron-card';
-
-  const gc=GROUP_COLOR[d.grpNum]||'#555';
-  const actionLabel=d.action==='gives'?`Gives ${d.val} electron${d.val!==1?'s':''}`:
-                    d.action==='receives'?`Needs ${8-d.val} electron${(8-d.val)!==1?'s':''}`:
-                    d.action==='neutral'?'Already stable (8 electrons)':
-                    `Shares ${d.val} electrons`;
-  const actionCls=d.action==='gives'?'gives':d.action==='receives'?'receives':d.action==='neutral'?'neutral':'receives';
-
-  // How many of each to balance
-  let balanceNote='';
-  if(d.action==='gives'&&d.val>0){
-    balanceNote=`1 atom gives ${d.val} electron${d.val!==1?'s':''}. To satisfy an element that needs N electrons, you need N÷${d.val} atoms of ${sym}.`;
-  } else if(d.action==='receives'){
-    const need=8-d.val;
-    balanceNote=`1 atom needs ${need} electron${need!==1?'s':''}. To fill it, pair with an element that gives exactly ${need} electrons.`;
-  }
-
-  // Electron dots
-  const total=Math.min(d.e,18);
-  let dotsHTML='';
-  for(let i=0;i<total;i++){
-    dotsHTML+=`<span class="eec-dot${i>=total-d.val&&d.val>0?' val':''}"></span>`;
-  }
-  if(d.e>18)dotsHTML+=`<span style="font-size:.6em;color:#888">+${d.e-18}</span>`;
-
-  card.innerHTML=`
-    <div class="eec-header">
-      <span class="eec-sym" style="color:${d.col==='#FFD700'?'#ccac00':d.col}">${sym}</span>
-      <div>
-        <div class="eec-name">${d.name}</div>
-        <span class="eec-group" style="background:${gc}">${d.grp}</span>
-      </div>
-    </div>
-    <div class="eec-dots">${dotsHTML}</div>
-    <div style="font-size:.6em;color:#888;margin-top:1px;">Blue = core electrons &nbsp;|&nbsp; <span style="color:var(--gold-dark);font-weight:700;">Gold = valence electrons</span></div>
-    <div class="eec-action ${actionCls}">${actionLabel}</div>
-    <div class="eec-info">${balanceNote||d.desc.substring(0,100)+'…'}</div>
-  `;
-  container.appendChild(card);
-}
-
-// ════════════════════════════════════
-// LAB PAGE
-// ════════════════════════════════════
-let labCompounds=[],labAtomNodes=[],labBonds=[],labInitialized=false;
-const COMMON_ELEMS_LAB=['H','He','Li','Be','B','C','N','O','F','Ne','Na','Mg','Al','Si','P','S','Cl','Ar','K','Ca','Fe','Cu','Zn','Br','I','Au','Ag'];
-
-function addCompoundRow(){
-  const id='cr'+Date.now();
-  const row=document.createElement('div');
-  row.className='compound-row';row.dataset.id=id;
-  row.innerHTML=`
-    <input class="compound-text-input" placeholder="e.g. HCl, H2O…" id="ci-${id}" autocomplete="off"/>
-    <div style="display:flex;flex-wrap:wrap;gap:4px;max-width:280px" id="chips-${id}">
-      ${COMMON_ELEMS_LAB.map(e=>`<span class="el-chip" data-sym="${e}" onclick="toggleChip(this,'${id}')">${e}</span>`).join('')}
-    </div>
-    <button class="enter-btn" onclick="confirmCompound('${id}')">Enter →</button>
-    <button style="background:none;border:none;cursor:pointer;color:#e74c3c;font-size:1em;padding:4px" onclick="removeRow('${id}')">✕</button>`;
-  document.getElementById('compoundRows').appendChild(row);
-  updateCompleteBtn();
-}
-
-function toggleChip(chip,rowId){
-  chip.classList.toggle('picked');
-  const row=document.querySelector(`[data-id="${rowId}"]`);
-  const picked=[...row.querySelectorAll('.el-chip.picked')].map(c=>c.dataset.sym);
-  document.getElementById('ci-'+rowId).value=picked.join('');
-}
-
-function confirmCompound(rowId){
-  const input=document.getElementById('ci-'+rowId);
-  const formula=input.value.trim().toUpperCase().replace(/([A-Z][a-z]?)(\d*)/g,(m,s,n)=>s+(n||''));
-  // re-parse to normalise capitalisation
-  const normalised=input.value.trim();
-  if(!normalised)return;
-  const atoms=parseFormulaCounts(normalised);
-  labCompounds.push({formula:normalised,atoms,rowId});
-  const row=document.querySelector(`[data-id="${rowId}"]`);
-  const tag=document.createElement('div');
-  tag.className='compound-tag';tag.dataset.id=rowId;
-  tag.innerHTML=`<span>${normalised}</span><span class="tag-x" onclick="removeCompound('${rowId}')">✕</span>`;
-  row.replaceWith(tag);
-  updateCompleteBtn();
-}
-
-function removeRow(rowId){const r=document.querySelector(`[data-id="${rowId}"]`);if(r)r.remove();updateCompleteBtn();}
-function removeCompound(rowId){
-  labCompounds=labCompounds.filter(c=>c.rowId!=rowId);
-  const t=document.querySelector(`.compound-tag[data-id="${rowId}"]`);if(t)t.remove();
-  updateCompleteBtn();
-}
-function updateCompleteBtn(){document.getElementById('completeBtn').style.display=labCompounds.length>=2?'inline-block':'none';}
-
-function showEqBar(){
-  const bar=document.getElementById('labTopbar');
-  bar.classList.add('slide-away');
-  setTimeout(()=>{bar.style.display='none';document.getElementById('equation-bar').classList.add('visible');},620);
-}
-
-function startLab(eqStr){
-  document.getElementById('equation-bar').classList.remove('visible');
-  buildAtomPalette(eqStr);
-}
-
-// ── Atom palette — FIX: each atom spawns individually (multiple H atoms possible) ──
-function buildAtomPalette(eqStr){
-  const canvas=document.getElementById('labCanvas');
-  const old=canvas.querySelector('.atom-palette');if(old)old.remove();
-  const oldG=canvas.querySelector('.eq-guide-bar');if(oldG)oldG.remove();
-
-  const guide=document.createElement('div');guide.className='eq-guide-bar';
-  guide.textContent=eqStr.replace(/->/g,'→').replace(/→/g,' → ');
-  canvas.appendChild(guide);
-
-  // Build pool: every individual atom from every compound
-  // e.g. H2O  → H, H, O
-  // e.g. 2H2O in eq → but palette is based on compound list
-  const atomPool=[];
-  labCompounds.forEach(c=>{
-    Object.entries(c.atoms).forEach(([sym,count])=>{
-      for(let i=0;i<count;i++) atomPool.push(sym);
-    });
-  });
-
-  const palette=document.createElement('div');palette.className='atom-palette';
-
-  // Group same symbols into palette items with count badge
-  const grouped={};
-  atomPool.forEach(s=>{grouped[s]=(grouped[s]||0)+1;});
-
-  Object.entries(grouped).forEach(([sym,total])=>{
-    // Create a "slot" that spawns a new atom each drag
-    const slot=document.createElement('div');
-    slot.className='palette-atom';
-    slot.style.background=elemColor(sym);
-    slot.innerHTML=`<span>${sym}</span><span class="palette-label" id="pal-count-${sym}">×${total}</span>`;
-    slot.title=`Drag to place a ${sym} atom (${total} available)`;
-    slot.dataset.sym=sym;
-    slot.dataset.remaining=total;
-
-    slot.addEventListener('mousedown',e=>{
-      e.preventDefault();
-      const rem=parseInt(slot.dataset.remaining);
-      if(rem<=0)return;
-      slot.dataset.remaining=rem-1;
-      document.getElementById(`pal-count-${sym}`).textContent=`×${rem-1}`;
-      if(rem-1===0)slot.style.opacity='.4';
-      // spawn atom at palette position
-      const wrap=document.getElementById('labCanvas');
-      const rect=wrap.getBoundingClientRect();
-      const pr=slot.getBoundingClientRect();
-      placeAtom(sym,pr.left-rect.left+60,pr.top-rect.top,e);
-    });
-
-    // Touch support
-    slot.addEventListener('touchstart',e=>{
-      const rem=parseInt(slot.dataset.remaining);
-      if(rem<=0)return;
-      slot.dataset.remaining=rem-1;
-      document.getElementById(`pal-count-${sym}`).textContent=`×${rem-1}`;
-      if(rem-1===0)slot.style.opacity='.4';
-      const wrap=document.getElementById('labCanvas');
-      const rect=wrap.getBoundingClientRect();
-      const t=e.touches[0];
-      placeAtom(sym,t.clientX-rect.left-34,t.clientY-rect.top-34);
-    },{passive:true});
-
-    palette.appendChild(slot);
-  });
-
-  canvas.appendChild(palette);
-  initBondCanvas();
-}
-
-function initBondCanvas(){
-  resizeBondCanvas();
-  window.addEventListener('resize',resizeBondCanvas);
-  requestAnimationFrame(drawBonds);
-}
-function resizeBondCanvas(){const c=document.getElementById('bondCanvas');if(c){c.width=c.offsetWidth;c.height=c.offsetHeight;}}
-
-let nodeId=0;
-function placeAtom(sym,x,y,triggerEv){
-  const wrap=document.getElementById('labCanvas');
-  const id='atom'+(nodeId++);
-  const div=document.createElement('div');
-  div.className='atom-node';div.id=id;
-  div.innerHTML=`<span>${sym}</span>`;
-  div.style.left=Math.max(80,Math.min(x,wrap.offsetWidth-80))+'px';
-  div.style.top=Math.max(20,Math.min(y,wrap.offsetHeight-80))+'px';
-  div.style.background=`radial-gradient(circle at 35% 35%, ${lighten(elemColor(sym),.35)}, ${elemColor(sym)})`;
-  div.dataset.sym=sym;
-
-  let dragging=false,ox=0,oy=0;
-
-  function startDrag(cx,cy){
-    dragging=true;
-    ox=cx-div.offsetLeft;oy=cy-div.offsetTop;div.style.zIndex=50;
-  }
-  function moveDrag(cx,cy){
-    if(!dragging)return;
-    div.style.left=(cx-ox)+'px';div.style.top=(cy-oy)+'px';
-    checkBondProximity(id);
-  }
-  function endDrag(){if(dragging){dragging=false;div.style.zIndex=5;}}
-
-  div.addEventListener('mousedown',e=>{e.preventDefault();startDrag(e.clientX,e.clientY);});
-  div.addEventListener('touchstart',e=>{const t=e.touches[0];startDrag(t.clientX,t.clientY);},{passive:true});
-  document.addEventListener('mousemove',e=>{moveDrag(e.clientX,e.clientY);});
-  document.addEventListener('touchmove',e=>{const t=e.touches[0];moveDrag(t.clientX,t.clientY);},{passive:true});
-  document.addEventListener('mouseup',endDrag);document.addEventListener('touchend',endDrag);
-
-  wrap.appendChild(div);
-  labAtomNodes.push({id,sym,el:div});
-
-  // If triggered by a mousedown, immediately start dragging it
-  if(triggerEv){
-    setTimeout(()=>startDrag(triggerEv.clientX,triggerEv.clientY),10);
-  }
-}
-
-function lighten(hex,amt){
-  let n=parseInt(hex.replace('#',''),16);
-  const r=Math.min(255,(n>>16)+Math.round(amt*255));
-  const g=Math.min(255,((n>>8)&0xff)+Math.round(amt*255));
-  const b=Math.min(255,(n&0xff)+Math.round(amt*255));
-  return`#${r.toString(16).padStart(2,'0')}${g.toString(16).padStart(2,'0')}${b.toString(16).padStart(2,'0')}`;
-}
-
-function getCenter(node){return{x:node.el.offsetLeft+34,y:node.el.offsetTop+34};}
-const BOND_DIST=85;
-const VALENCE_MAP={H:1,He:0,Li:1,Be:2,B:3,C:4,N:3,O:2,F:1,Ne:0,Na:1,Mg:2,Al:3,Si:4,P:3,S:2,Cl:1,Ar:0,K:1,Ca:2,Fe:3,Cu:2,Zn:2,Br:1,I:1,Au:1,Ag:1};
-
-function isBondValid(symA,symB,idA,idB){
-  if(VALENCE_MAP[symA]===0||VALENCE_MAP[symB]===0)return false;
-  const bondsA=labBonds.filter(b=>b.a===idA||b.b===idA).length;
-  const bondsB=labBonds.filter(b=>b.a===idB||b.b===idB).length;
-  const vA=VALENCE_MAP[symA]??4;
-  const vB=VALENCE_MAP[symB]??4;
-  if(bondsA>=vA||bondsB>=vB)return false;
-  if(window.targetEquation){
-    const prod=window.targetEquation.products;
-    if(!Object.keys(prod).includes(symA)||!Object.keys(prod).includes(symB))return false;
-  }
-  return true;
-}
-
-function checkBondProximity(movingId){
-  const moving=labAtomNodes.find(n=>n.id===movingId);if(!moving)return;
-  const cm=getCenter(moving);
-  for(const other of labAtomNodes){
-    if(other.id===movingId)continue;
-    const co=getCenter(other);
-    const dist=Math.hypot(cm.x-co.x,cm.y-co.y);
-    const alreadyBonded=labBonds.some(b=>(b.a===movingId&&b.b===other.id)||(b.a===other.id&&b.b===movingId));
-    if(dist<BOND_DIST&&!alreadyBonded){
-      const valid=isBondValid(moving.sym,other.sym,movingId,other.id);
-      if(valid){
-        labBonds.push({a:movingId,b:other.id});
-        moving.el.classList.add('bonded-ok');other.el.classList.add('bonded-ok');
-        setTimeout(()=>{moving.el.classList.remove('bonded-ok');other.el.classList.remove('bonded-ok');},650);
-        playBondSound(true);flashScreen(true);
-      } else {
-        moving.el.classList.add('bonded-err');other.el.classList.add('bonded-err');
-        setTimeout(()=>{moving.el.classList.remove('bonded-err');other.el.classList.remove('bonded-err');},650);
-        playBondSound(false);flashScreen(false);
-      }
-    }
-  }
-}
-
-function playBondSound(ok){
-  try{
-    const ctx=new(window.AudioContext||window.webkitAudioContext)();
-    const osc=ctx.createOscillator();const gain=ctx.createGain();
-    osc.connect(gain);gain.connect(ctx.destination);osc.type='sine';
-    if(ok){osc.frequency.setValueAtTime(660,ctx.currentTime);osc.frequency.exponentialRampToValueAtTime(1100,ctx.currentTime+.14);gain.gain.setValueAtTime(.28,ctx.currentTime);gain.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+.4);}
-    else{osc.frequency.setValueAtTime(200,ctx.currentTime);osc.frequency.exponentialRampToValueAtTime(160,ctx.currentTime+.28);gain.gain.setValueAtTime(.32,ctx.currentTime);gain.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+.5);}
-    osc.start();osc.stop(ctx.currentTime+(ok?.4:.5));
-  }catch(e){}
-}
-function flashScreen(ok){
-  const f=document.createElement('div');f.className='bond-flash '+(ok?'ok':'err');
-  document.body.appendChild(f);setTimeout(()=>f.remove(),550);
-}
-
-function drawBonds(){
-  const c=document.getElementById('bondCanvas');
-  if(!c){requestAnimationFrame(drawBonds);return;}
-  const ctx=c.getContext('2d');
-  ctx.clearRect(0,0,c.width,c.height);
-  // proximity guides
-  for(const n of labAtomNodes){
-    const cm=getCenter(n);
-    for(const o of labAtomNodes){
-      if(o.id<=n.id)continue;
-      const co=getCenter(o);const dist=Math.hypot(cm.x-co.x,cm.y-co.y);
-      if(dist<BOND_DIST*1.8&&dist>BOND_DIST){
-        ctx.save();ctx.setLineDash([5,7]);ctx.strokeStyle='rgba(255,200,0,.28)';ctx.lineWidth=2;
-        ctx.beginPath();ctx.moveTo(cm.x,cm.y);ctx.lineTo(co.x,co.y);ctx.stroke();ctx.restore();
-      }
-    }
-  }
-  // bonds
-  for(const bond of labBonds){
-    const na=labAtomNodes.find(n=>n.id===bond.a);const nb=labAtomNodes.find(n=>n.id===bond.b);
-    if(!na||!nb)continue;
-    const ca=getCenter(na),cb=getCenter(nb);
-    const grad=ctx.createLinearGradient(ca.x,ca.y,cb.x,cb.y);
-    grad.addColorStop(0,elemColor(na.sym));grad.addColorStop(1,elemColor(nb.sym));
-    ctx.save();ctx.strokeStyle=grad;ctx.lineWidth=7;ctx.lineCap='round';
-    ctx.shadowColor='rgba(76,175,80,.4)';ctx.shadowBlur=12;
-    ctx.beginPath();ctx.moveTo(ca.x,ca.y);ctx.lineTo(cb.x,cb.y);ctx.stroke();ctx.restore();
-    const mx=(ca.x+cb.x)/2,my=(ca.y+cb.y)/2;
-    ctx.save();ctx.fillStyle='rgba(255,255,255,.92)';ctx.beginPath();ctx.arc(mx,my,11,0,Math.PI*2);ctx.fill();
-    ctx.fillStyle='#2e7d32';ctx.font='bold 12px Rajdhani,sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('—',mx,my);ctx.restore();
-  }
-  requestAnimationFrame(drawBonds);
-}
-
-function initLabPage(){
-  if(labInitialized)return;labInitialized=true;
-  labCompounds=[];labAtomNodes=[];labBonds=[];nodeId=0;
-  const bar=document.getElementById('labTopbar');
-  bar.classList.remove('slide-away');bar.style.display='';
-  document.getElementById('equation-bar').classList.remove('visible');
-  document.getElementById('electron-sidebar').classList.remove('visible');
-  document.getElementById('compoundRows').innerHTML='';
-  document.getElementById('completeBtn').style.display='none';
-  document.getElementById('eqInput').value='';
-  document.getElementById('eqStatus').innerHTML='';
-  addCompoundRow();
-}
-</script>
 
 <!-- ════════ WAVELENGTHS PAGE ════════ -->
 <div id="wavelengths-page" class="page hidden">
-  <div style="width:100%;background:rgba(255,255,255,.15);backdrop-filter:blur(8px);border-bottom:2px solid rgba(255,107,0,.3);padding:10px 20px;display:flex;align-items:center;gap:14px;position:sticky;top:0;z-index:50;">
-    <button class="btn" onclick="goToHome()" style="padding:8px 18px;font-size:.78em;white-space:nowrap;">← Home</button>
-    <div style="font-family:Rajdhani,sans-serif;font-weight:700;letter-spacing:4px;color:#cc5500;font-size:1.1em;">TF ~ WAVELENGTHS</div>
+  <div class="wl-nav-bar">
+    <button class="btn" onclick="goToHome()" style="padding:8px 18px;font-size:.78em;flex-shrink:0;">← Home</button>
+    <div class="wl-nav-title">TF ~ WAVELENGTHS</div>
+    <button class="btn" onclick="toggleSeb()" style="padding:8px 14px;font-size:.75em;flex-shrink:0;">🤖 Sebatana</button>
   </div>
 <div id="app">
 
@@ -2172,7 +1526,7 @@ function initLabPage(){
 </div>
 
 <!-- ════════ PAGE: GRADE SELECT ════════ -->
-<div class="wl-inner-page active" id="wl-page-grade">
+<div class="wl-subpage active" id="wl-grade">
   <div class="grade-hero">
     <h1>Choose Your Grade</h1>
     <p>
@@ -2215,7 +1569,7 @@ function initLabPage(){
 </div>
 
 <!-- ════════ PAGE: LEARN ════════ -->
-<div class="wl-inner-page" id="wl-page-learn">
+<div class="wl-subpage" id="wl-learn">
 
   <!-- section nav -->
   <div class="section-nav" id="sectionNav">
@@ -2986,9 +2340,63 @@ window.addEventListener('load', () => {
 });
 </script>
 </div>
-
+<!-- ════════ SIMULATIONS PAGE ════════ -->
+<div id="simulations-page" class="page hidden">
+  <div class="sim-nav-bar">
+    <button class="btn" onclick="goToHome()" style="padding:8px 18px;font-size:.78em;background:rgba(255,255,255,.1);border-color:rgba(255,215,0,.4);color:var(--gold);">← Home</button>
+    <div class="sim-nav-title">TF ~ SIMULATIONS</div>
+    <button class="btn" onclick="toggleSeb()" style="padding:8px 14px;font-size:.75em;background:rgba(255,255,255,.1);border-color:rgba(255,215,0,.4);color:var(--gold);">🤖 Sebatana</button>
+  </div>
+  <div class="sim-intro">
+    <div class="sim-intro-title">Physics Simulations</div>
+    <div class="sim-intro-sub">Each topic has a plain-English definition, key concepts and formulas — and a live PhET simulation. Read the theory first, then explore the simulation to see it come alive.</div>
+  </div>
+  <div id="sim-grid-wrap"><div id="sim-grid"></div></div>
+  <div id="sim-detail">
+    <div class="sim-detail-header">
+      <button class="sim-back-btn" onclick="closeSim()">← Back</button>
+      <div id="sim-detail-title"></div>
+      <button class="sim-back-btn" onclick="toggleSeb()" style="margin-left:auto;">🤖 Sebatana</button>
+    </div>
+    <div class="sim-split">
+      <div id="sim-theory"></div>
+      <div class="sim-iframe-wrap"><iframe id="sim-iframe" src="" allowfullscreen></iframe></div>
+    </div>
+  </div>
+</div>
+<!-- ════════ STUDY NOTES PAGE ════════ -->
+<div id="study-page" class="page hidden">
+  <div class="study-nav-bar">
+    <button class="btn" onclick="goToHome()" style="padding:8px 18px;font-size:.78em;background:rgba(255,255,255,.1);border-color:rgba(124,58,237,.4);color:#a78bfa;">← Home</button>
+    <div class="study-nav-title">📓 STUDY NOTES</div>
+    <button class="btn" onclick="toggleSeb()" style="padding:8px 14px;font-size:.75em;background:rgba(255,255,255,.1);border-color:rgba(124,58,237,.4);color:#a78bfa;">🤖 Sebatana</button>
+  </div>
+  <div class="study-layout">
+    <div>
+      <div style="font-family:Rajdhani,sans-serif;font-size:.7em;letter-spacing:2px;color:rgba(255,255,255,.4);text-transform:uppercase;margin-bottom:10px;">Subjects</div>
+      <div id="study-tabs"></div>
+    </div>
+    <div class="study-right">
+      <div class="study-ai-bar">
+        <div class="study-ai-label">🤖 Ask Sebatana to generate notes</div>
+        <div class="study-ai-row">
+          <input id="study-ask" placeholder="e.g. Newton's 2nd Law, photosynthesis, ionic bonds…" onkeydown="if(event.key==='Enter')askSebForNotes()"/>
+          <button class="study-ai-btn" onclick="askSebForNotes()">Generate →</button>
+        </div>
+        <div id="study-ai-response"></div>
+      </div>
+      <div class="note-write-area">
+        <div class="note-write-label">Write your own note</div>
+        <input id="note-title" placeholder="Note title…"/>
+        <textarea id="note-body" rows="3" placeholder="Write your notes here…"></textarea>
+        <button class="note-save-manual-btn" onclick="saveNote()">Save Note</button>
+      </div>
+      <div id="notes-area"></div>
+    </div>
+  </div>
+</div>
 <!-- ════════════ THESIS PAGE ════════════ -->
-<div id="thesis-page" class="page hidden" style="background:linear-gradient(160deg,#FF8C42 0%,#FFB347 30%,#FFF8F0 75%);justify-content:flex-start;">
+<div id="thesis-page" class="page hidden">
   <div class="thesis-header">
     <div class="ntok-avatar">
       <div class="ntok-glyph">N</div>
@@ -2998,7 +2406,7 @@ window.addEventListener('load', () => {
       <div class="thesis-name">NTOKOZO</div>
       <div class="thesis-tagline">Thesis Development AI · TF Innovations</div>
     </div>
-    <button class="thesis-back-btn" onclick="goToHome()">← Home</button>
+    <button class="thesis-back-btn" onclick="goToHome()">← Back</button>
   </div>
   <div class="thesis-chat-wrap">
     <div class="thesis-stage" id="thesisStage">
@@ -3559,9 +2967,81 @@ document.addEventListener('keydown', e => {
 </script>
 
 <script>
-/* ════════════════════════════════════
-   PHASE 1 — Core JS
-════════════════════════════════════ */
+/* ════ 1. NAVIGATION (first — defines show/hide/showPage) ════ */
+// ════════════════════════════════════
+// UNIFIED NAVIGATION — ALL PAGES
+// ════════════════════════════════════
+const ALL_PAGES = ['home-page','table-page','lab-page','wavelengths-page','thesis-page','simulations-page','study-page'];
+
+function showPage(id) {
+  ALL_PAGES.forEach(p => {
+    const el = document.getElementById(p);
+    if (!el) return;
+    el.classList.add('hidden');
+    el.style.display = '';
+  });
+  const target = document.getElementById(id);
+  if (target) target.classList.remove('hidden');
+}
+
+function goToHome() {
+  showPage('home-page');
+  document.getElementById('rotary-trigger').classList.remove('visible');
+  document.getElementById('seb-idle').classList.remove('visible');
+  closePanel();
+  if (typeof closeCard === 'function') closeCard();
+  if (typeof stopActivityMonitor === 'function') stopActivityMonitor();
+  setSebContext('home');
+}
+function goToLab() {
+  showPage('table-page');
+  document.getElementById('rotary-trigger').classList.add('visible');
+  document.getElementById('seb-idle').classList.add('visible');
+  setSebContext('periodic');
+  startActivityMonitor();
+}
+function switchToTable() { showPage('table-page'); closePanel(); setSebContext('periodic'); }
+function switchToAtomLab() { showPage('lab-page'); closePanel(); initLabPage(); setSebContext('bonding'); startActivityMonitor(); }
+function switchToWavelengths() {
+  showPage('wavelengths-page');
+  closePanel();
+  setSebContext('wavelengths');
+  // reset wavelengths to grade select
+  const g = document.getElementById('wl-grade');
+  const l = document.getElementById('wl-learn');
+  if (g) { g.classList.add('active'); }
+  if (l) { l.classList.remove('active'); }
+  document.getElementById('seb-idle').classList.add('visible');
+}
+function switchToThesis() {
+  showPage('thesis-page');
+  closePanel();
+  setSebContext('thesis');
+  document.getElementById('seb-idle').classList.add('visible');
+  if (typeof initThesis === 'function') initThesis();
+}
+function switchToSimulations() {
+  showPage('simulations-page');
+  closePanel();
+  setSebContext('simulations');
+  document.getElementById('seb-idle').classList.add('visible');
+}
+function switchToStudy() {
+  showPage('study-page');
+  closePanel();
+  setSebContext('study');
+  document.getElementById('seb-idle').classList.add('visible');
+  if (typeof initStudyMode === 'function') initStudyMode();
+}
+
+// Stub overrides (replaced by phase-specific fns below)
+function show(id) { document.getElementById(id)?.classList.remove('hidden'); }
+function hide(id) { document.getElementById(id)?.classList.add('hidden'); }
+function hideAll() { ALL_PAGES.forEach(hide); }
+
+
+/* ════ 2. PHASE 1 CORE ════ */
+
 // ════════════════════════════════════
 // FULL ELEMENT DATABASE (all 118 + D)
 // ════════════════════════════════════
@@ -3702,13 +3182,13 @@ function elemColor(s){return ELEM_COLORS[s]||'#b0c4de';}
 // ════════════════════════════════════
 // NAVIGATION
 // ════════════════════════════════════
-function goToLab(){hide('home-page');show('table-page');document.getElementById('rotary-trigger').classList.add('visible');}
-function goToHome(){hideAll();show('home-page');document.getElementById('rotary-trigger').classList.remove('visible');closePanel();closeCard();}
-function switchToTable(){hideAll();show('table-page');closePanel();}
-function switchToAtomLab(){hideAll();show('lab-page');closePanel();initLabPage();}
-function show(id){document.getElementById(id).classList.remove('hidden');}
-function hide(id){document.getElementById(id).classList.add('hidden');}
-function hideAll(){['home-page','table-page','lab-page'].forEach(hide);}
+/* overridden by nav */
+/* overridden by nav */
+/* overridden by nav */
+/* overridden by nav */
+/* overridden by nav */
+/* overridden by nav */
+/* overridden by nav */
 
 // ════════════════════════════════════
 // ROTARY PANEL
@@ -4318,38 +3798,8 @@ function initLabPage(){
 }
 
 
-// ── EXTRA NAV (Phase 2 modes) ──
-function switchToWavelengths(){
-  hideAll();show('wavelengths-page');closePanel();
-  // reset wavelengths to grade select
-  document.getElementById('wl-page-grade').classList.add('active');
-  document.getElementById('wl-page-learn').classList.remove('active');
-}
-function switchToThesis(){
-  hideAll();show('thesis-page');closePanel();
-  initThesis();
-}
-function hideAll(){
-  ['home-page','table-page','lab-page','wavelengths-page','thesis-page'].forEach(id=>{
-    const el=document.getElementById(id);
-    if(el){el.classList.add('hidden');}
-  });
-}
-// override goToHome for all pages
-function goToHome(){
-  hideAll();show('home-page');
-  document.getElementById('rotary-trigger').classList.remove('visible');
-  closePanel();closeCard();
-  if(typeof stopActivityMonitor==='function')stopActivityMonitor();
-  if(typeof sebOpen!=='undefined'&&sebOpen)toggleSeb();
-}
-// Sebatana error bridge
-function onBondError(){ if(typeof sebOnError==='function')sebOnError(); }
+/* ════ 3. WAVELENGTHS ════ */
 
-
-/* ════════════════════════════════════
-   PHASE 2A — Wavelengths JS  
-════════════════════════════════════ */
 // ════════════════════════════════════
 // STATE
 // ════════════════════════════════════
@@ -4371,8 +3821,8 @@ function startLearn() {
   if (!currentGrade) return;
   document.getElementById('headerGrade').style.display = 'block';
   document.getElementById('headerGrade').textContent = `Grade ${currentGrade}`;
-  document.getElementById('wl-page-grade').classList.remove('active');
-  document.getElementById('wl-page-learn').classList.add('active');
+  document.getElementById('wl-grade').classList.remove('active');
+  document.getElementById('wl-learn').classList.add('active');
   buildLearnPage();
 }
 
@@ -5105,292 +4555,8 @@ window.addEventListener('load', () => {
   }, 200);
 });
 
-/* ════════════════════════════════════
-   PHASE 2B — Sebatana + Thesis JS
-════════════════════════════════════ */
-// ══════════════════════════════════════
-// GLOBAL STATE
-// ══════════════════════════════════════
-let currentMode = 'home';   // 'home' | 'lab' | 'thesis'
-let labContext  = 'periodic'; // what the lab is currently showing
-let sebOpen     = false;
-let sebMsgCount = 0;
-let errorCount  = 0;
-let lastActivityTime = Date.now();
-let activityTimer = null;
-let thesisStage = 'explore'; // 'explore' | 'refine' | 'build' | 'code'
-let thesisMsgHistory = [];   // for multi-turn context
-let sebMsgHistory = [];
 
-// Context descriptions Sebatana uses to understand what's on screen
-const LAB_CONTEXTS = {
-  periodic: {
-    label:'Periodic Table',
-    desc:'The user is viewing the interactive periodic table. They can click elements to see a 3D card with atomic number, mass, electron configuration, group, use, and bonding information. Gold dots on the card represent valence electrons.',
-    example:'Example shown: clicking on Beryllium (Be) shows: atomic number 4, mass 9.012, Group 2 (Alkaline Earth), valence 2 electrons, gives 2 electrons — pairs well with group 16/17 elements like Oxygen or Chlorine.',
-    suggestions:['What does valence mean?','Why does Be give 2 electrons?','What is the atomic number?','How do I read the card?'],
-  },
-  bonding: {
-    label:'Atom Bonding Lab',
-    desc:'The user is in the bonding lab. They added compounds, entered a balanced equation (e.g. H2 + Cl2 → 2HCl), and are now dragging individual atom balls onto a canvas. When two atoms come close, if the bond is valid, they snap together with a green flash and a chime. If wrong, it flashes red.',
-    example:'Example equation: H2 + Cl2 → 2HCl. This means 2 hydrogen atoms and 2 chlorine atoms combine to make 2 molecules of hydrochloric acid. Each H (valence 1) bonds with one Cl (valence 7, needs 1 electron) — one bond each, perfectly balanced.',
-    suggestions:['What does H2 + Cl2 → 2HCl mean?','Why does H bond with Cl?','What is a covalent bond?','Why does it flash red?'],
-  },
-  wavelengths: {
-    label:'Wavelengths Mode',
-    desc:'The user is studying wavelengths in the physics section. The grade they selected determines what content they see. Grade 10: wave equation (v=fλ). Grade 11: EM spectrum, Doppler effect. Grade 12: photon energy (E=hf), photoelectric effect, wave-particle duality.',
-    example:'Example (Gr10): v = f × λ. If a sound wave has frequency f = 500 Hz and wavelength λ = 0.68m, then speed = 500 × 0.68 = 340 m/s (the speed of sound in air). Example (Gr12): E = hf. A photon of frequency 6×10¹⁴ Hz has energy E = 6.626×10⁻³⁴ × 6×10¹⁴ = 3.98×10⁻¹⁹ J.',
-    suggestions:['Explain v = fλ','What is frequency?','How does the Doppler effect work?','What is a photon?'],
-  },
-};
-
-// ══════════════════════════════════════
-// NAVIGATION
-// ══════════════════════════════════════
-/* removed */
-
-/* removed */
-
-/* removed */
-
-/* removed */
-
-// ══════════════════════════════════════
-// SEBATANA — CORE
-// ══════════════════════════════════════
-function toggleSeb() {
-  sebOpen = !sebOpen;
-  document.getElementById('seb-panel').classList.toggle('open', sebOpen);
-  document.getElementById('sebNotif').classList.remove('show');
-  if (sebOpen && sebMsgCount === 0) {
-    sebGreet();
-    triggerSebWave();
-  }
-}
-
-function triggerSebWave() {
-  const head = document.getElementById('sebHead');
-  if (!head) return;
-  head.classList.remove('waving');
-  void head.offsetWidth;
-  head.classList.add('waving');
-  setTimeout(() => head.classList.remove('waving'), 1200);
-}
-
-function sebGreet() {
-  const ctx = LAB_CONTEXTS[labContext];
-  const greets = [
-    `Hey! 👋 I'm <strong>Sebatana</strong> — your lab monitor. I can see you're in <em>${ctx.label}</em> mode right now.\n\nI won't give you answers directly, but I'll guide you like a good teacher — ask me anything and I'll help you figure it out yourself.`,
-    `Hi there! 👋 I'm <strong>Sebatana</strong>. I keep an eye on your session and step in when you need a nudge. You're currently in <em>${ctx.label}</em> — what would you like to understand better?`,
-  ];
-  addSebMsg('seb', greets[Math.floor(Math.random() * greets.length)], true);
-  setSebMood('happy');
-}
-
-function addSebMsg(from, text, html=false) {
-  const msgs = document.getElementById('sebMsgs');
-  const wrapper = document.createElement('div');
-  wrapper.className = 'msg ' + from;
-  const avatar = document.createElement('div');
-  avatar.className = 'msg-avatar';
-  avatar.textContent = from === 'seb' ? 'S' : 'You';
-  const bubble = document.createElement('div');
-  bubble.className = 'msg-bubble';
-  if (html) bubble.innerHTML = text.replace(/\n/g, '<br>');
-  else bubble.textContent = text;
-  wrapper.appendChild(avatar);
-  wrapper.appendChild(bubble);
-  msgs.appendChild(wrapper);
-  msgs.scrollTop = msgs.scrollHeight;
-  sebMsgCount++;
-}
-
-function showSebTyping() {
-  const msgs = document.getElementById('sebMsgs');
-  const t = document.createElement('div');
-  t.className = 'msg seb'; t.id = 'seb-typing';
-  t.innerHTML = `<div class="msg-avatar">S</div>
-    <div class="typing-indicator">
-      <div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>
-    </div>`;
-  msgs.appendChild(t);
-  msgs.scrollTop = msgs.scrollHeight;
-}
-function removeSebTyping() {
-  const t = document.getElementById('seb-typing');
-  if (t) t.remove();
-}
-
-function setSebMood(mood) {
-  const m = document.getElementById('sebMouth');
-  if (!m) return;
-  m.className = 'seb-mouth ' + mood;
-}
-
-function renderSebSuggestions(sugs) {
-  const wrap = document.getElementById('sebSuggestions');
-  if (!wrap) return;
-  wrap.innerHTML = sugs.map(s =>
-    `<div class="sug-chip" onclick="sendSebQuick('${s.replace(/'/g,"\\'")}')"><span>💬</span> ${s}</div>`
-  ).join('');
-}
-
-function sendSebQuick(text) {
-  document.getElementById('sebInput').value = text;
-  sendSeb();
-}
-
-async function sendSeb() {
-  const input = document.getElementById('sebInput');
-  const text = input.value.trim();
-  if (!text) return;
-  input.value = '';
-  addSebMsg('user', text);
-  setSebMood('thinking');
-  document.getElementById('sebStatusTxt').textContent = 'Thinking…';
-  showSebTyping();
-  lastActivityTime = Date.now();
-
-  const ctx = LAB_CONTEXTS[labContext];
-  const systemPrompt = `You are Sebatana, a friendly, encouraging lab monitor AI for TF Innovations — an interactive science education website for students.
-
-Your personality: warm, patient, slightly playful, like a great teacher. You use a Socratic teaching style — you NEVER give direct answers to science problems. Instead, you ask guiding questions and give hints that lead the student to figure it out themselves.
-
-Current context the student is working in:
-Mode: ${ctx.label}
-${ctx.desc}
-${ctx.example}
-
-Rules:
-1. NEVER directly solve a science problem for the student. Instead, break it down with a question or hint.
-2. Use real examples from the current context (e.g. if in bonding mode, reference H2+Cl2→2HCl).
-3. Keep responses concise — 2-4 sentences max unless explaining a concept.
-4. Use encouraging language. If the student seems to be making progress, say "Good thinking!" or similar.
-5. If explaining a formula, explain what each symbol means but ask the student to plug in the numbers themselves.
-6. You can ONLY see the TF Innovations website — you have no knowledge of anything outside this site.
-7. Respond in a conversational, student-friendly tone. No bullet-point lists unless necessary.`;
-
-  sebMsgHistory.push({ role: 'user', content: text });
-  if (sebMsgHistory.length > 12) sebMsgHistory = sebMsgHistory.slice(-12);
-
-  try {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        system: systemPrompt,
-        messages: sebMsgHistory,
-      }),
-    });
-    const data = await res.json();
-    removeSebTyping();
-    const reply = data.content?.map(b => b.text||'').join('') || "I'm having a moment — try asking again!";
-    sebMsgHistory.push({ role: 'assistant', content: reply });
-    addSebMsg('seb', reply, true);
-    setSebMood('happy');
-    document.getElementById('sebStatusTxt').textContent = 'Monitoring your session';
-  } catch (e) {
-    removeSebTyping();
-    addSebMsg('seb', "Oops — I couldn't reach my thinking engine. Check your connection and try again.", false);
-    setSebMood('thinking');
-    document.getElementById('sebStatusTxt').textContent = 'Connection issue';
-  }
-}
-
-// ══════════════════════════════════════
-// ACTIVITY MONITOR
-// ══════════════════════════════════════
-let inactiveWarned = false;
-let goodJobSent = false;
-let lastGoodJobTime = 0;
-
-function startActivityMonitor() {
-  stopActivityMonitor();
-  // Track mouse/key activity
-  ['mousemove','keydown','click','touchstart'].forEach(ev => {
-    document.addEventListener(ev, markActivity, { passive: true });
-  });
-  activityTimer = setInterval(checkActivity, 30000); // check every 30s
-}
-
-function stopActivityMonitor() {
-  if (activityTimer) { clearInterval(activityTimer); activityTimer = null; }
-  ['mousemove','keydown','click','touchstart'].forEach(ev => {
-    document.removeEventListener(ev, markActivity);
-  });
-}
-
-function markActivity() {
-  lastActivityTime = Date.now();
-  inactiveWarned = false;
-}
-
-function checkActivity() {
-  if (typeof currentMode === "undefined" || true) return;
-  const elapsed = Date.now() - lastActivityTime;
-  const elapsedMin = elapsed / 60000;
-
-  // Good job every 5 minutes of activity
-  const timeSinceGoodJob = Date.now() - lastGoodJobTime;
-  if (elapsed < 15000 && timeSinceGoodJob > 300000) {
-    // They're active
-    const goodJobMsgs = [
-      "Great work! 🌟 Keep going — you're making real progress!",
-      "Nice effort! 👏 I can see you're working hard. That's exactly what science takes.",
-      "You're doing brilliantly! ⚛️ Consistency like this is how scientists think.",
-    ];
-    showSebNotification(goodJobMsgs[Math.floor(Math.random() * goodJobMsgs.length)]);
-    lastGoodJobTime = Date.now();
-    goodJobSent = true;
-  }
-
-  // Inactive for 3+ minutes
-  if (elapsedMin >= 3 && !inactiveWarned) {
-    inactiveWarned = true;
-    const ctx = LAB_CONTEXTS[labContext];
-    const nudges = {
-      periodic: "I noticed you've been quiet for a bit! 🤔 Try clicking on any element — even something familiar like Carbon (C). See if you can figure out why it has 4 valence electrons before I explain it.",
-      bonding: `Still there? 💭 Remember — for the bonding lab to work, you need to drag atoms onto the canvas and bring them close together. Think about the equation example: in H₂ + Cl₂ → 2HCl, how many total atoms do you need to place?`,
-      wavelengths: "Taking a break? 📚 When you're ready, try the interactive calculator — enter a frequency and wavelength and see if the speed you get makes sense. For sound in air, you'd expect about 340 m/s.",
-    };
-    showSebNotification(nudges[labContext] || "Hey — still with me? 👋 Let me know if you need a hint!");
-  }
-}
-
-function showSebNotification(text) {
-  if (!sebOpen) {
-    document.getElementById('sebNotif').classList.add('show');
-    // Queue message
-    setTimeout(() => {
-      if (!sebOpen) {
-        // Auto-open briefly
-        toggleSeb();
-        setTimeout(() => addSebMsg('seb', text, true), 400);
-      }
-    }, 500);
-  } else {
-    addSebMsg('seb', text, true);
-    setSebMood('happy');
-  }
-}
-
-// Error tracking (called externally when a wrong bond is made)
-function sebOnError() {
-  errorCount++;
-  if (errorCount >= 3) {
-    errorCount = 0;
-    const ctx = LAB_CONTEXTS[labContext];
-    const hints = {
-      bonding: `I see a few wrong bonds! 🔴 Don't worry — let me give you a hint.\n\nIn the bonding lab, atoms only connect if they appear together in your target product. Also check: has the atom used all its valence bonds already? For example, Oxygen (O) has 2 valence electrons — it can only form 2 bonds total. Try thinking about which atoms SHOULD be touching in your molecule.`,
-      periodic: `A few things didn't go as expected! 💡 Remember — when you click an element, the card shows its valence electrons as gold dots. That number tells you how many bonds it can make. Does the element you're looking at have enough "room" to bond with your chosen partner?`,
-      wavelengths: `A few incorrect answers! 💡 That's totally fine — let me guide you.\n\nFor wave calculations, always start by writing down what you KNOW and what you NEED to find. Then pick the formula that connects them. For v = fλ: if you know v and f, you can find λ = v ÷ f. Which values do you have?`,
-    };
-    showSebNotification(hints[labContext] || `Three mistakes — let me help! Think carefully about what each element needs to be stable.`);
-  }
-}
-
+/* ════ 4. THESIS (Ntokozo) ════ */
 // ══════════════════════════════════════
 // THESIS MODE — NTOKOZO
 // ══════════════════════════════════════
@@ -5553,25 +4719,566 @@ document.addEventListener('keydown', e => {
   });
 });
 
-/* ════ BOND ERROR BRIDGE ════ */
-// Patch checkBondProximity to notify Sebatana on errors
-const _origCheckBond = checkBondProximity;
-function checkBondProximity(id) {
-  const before = labBonds.length;
-  _origCheckBond(id);
-  // If no new bond was added but proximity was close, error might have fired
-  // We track via the existing flashScreen which calls ok/err
-}
-const _origFlash = flashScreen;
-let _errCount = 0;
-function flashScreen(ok) {
-  _origFlash(ok);
-  if (!ok) { _errCount++; if(_errCount>=3){_errCount=0;if(typeof sebOnError==='function')sebOnError();} }
+
+/* ════ 5. SIMULATIONS + STUDY ════ */
+// ════════════════════════════════════
+// SIMULATIONS MODE
+// ════════════════════════════════════
+const SIMS = [
+  {
+    id:'motion',
+    title:'Motion & Forces',
+    icon:'🏃',
+    color:'#3498db',
+    phet:'https://phet.colorado.edu/sims/html/forces-and-motion-basics/latest/forces-and-motion-basics_en.html',
+    definition:'Motion is the change in position of an object over time relative to a reference point.',
+    plain:'Imagine you\'re sitting on a bus — you\'re moving relative to the ground, but not moving relative to the seat next to you. That\'s what "relative to a reference point" means. Motion always needs a reference!',
+    concepts:[
+      {title:'Speed vs Velocity',body:'Speed tells you HOW FAST something moves. Velocity tells you how fast AND in what direction. A car going 60 km/h north has a velocity. A car going 60 km/h in circles has speed but changing velocity — because the direction keeps changing.'},
+      {title:'Acceleration',body:'Acceleration is any change in velocity — speeding up, slowing down, or changing direction. When you brake a car, you accelerate (negatively). When you turn a corner at constant speed, you still accelerate because the direction changes.'},
+      {title:'Newton\'s Laws',body:'1st: An object at rest stays at rest, and an object in motion stays in motion, unless acted on by a net force. (A ball rolls forever in space — only friction stops it on Earth.) 2nd: Force = mass × acceleration. Bigger mass needs more force to accelerate. 3rd: Every action has an equal and opposite reaction. (A rocket pushes gas backward; gas pushes rocket forward.)'},
+      {title:'Key Formulas',body:'v = u + at | s = ut + ½at² | v² = u² + 2as | F = ma\nWhere: v = final velocity, u = initial velocity, a = acceleration, t = time, s = displacement, F = force, m = mass'},
+    ]
+  },
+  {
+    id:'waves',
+    title:'Sound & Waves',
+    icon:'〰️',
+    color:'#9b59b6',
+    phet:'https://phet.colorado.edu/sims/html/wave-on-a-string/latest/wave-on-a-string_en.html',
+    definition:'A wave is a disturbance that transfers energy through matter or space without permanently displacing the medium.',
+    plain:'Think of a crowd doing "the wave" at a stadium. The people don\'t move across the stadium — they just move up and down. But the "wave" travels all the way around. That\'s exactly how real waves work — energy travels, matter stays.',
+    concepts:[
+      {title:'Transverse vs Longitudinal',body:'Transverse waves vibrate PERPENDICULAR to the direction they travel. (Light, water waves — imagine shaking a rope side to side while it moves forward.) Longitudinal waves vibrate PARALLEL to their direction. (Sound — the air particles compress and expand in the same direction the sound travels.)'},
+      {title:'Wave Properties',body:'Wavelength (λ): distance from peak to peak. Frequency (f): waves per second (Hz). Amplitude: height of the wave — relates to energy. Period (T): time for one complete wave = 1/f.'},
+      {title:'The Wave Equation',body:'v = fλ (wave speed = frequency × wavelength). This is always true for all waves. For sound in air: v ≈ 340 m/s. For light in vacuum: v = 3×10⁸ m/s (the fastest anything can travel).'},
+      {title:'Sound',body:'Sound is a longitudinal wave that needs a medium — it cannot travel through a vacuum. This is why space is silent. The pitch of a sound is its frequency. Higher frequency = higher pitch. The loudness is the amplitude.'},
+    ]
+  },
+  {
+    id:'heat',
+    title:'Heat & Thermodynamics',
+    icon:'🌡️',
+    color:'#e74c3c',
+    phet:'https://phet.colorado.edu/sims/html/energy-forms-and-changes/latest/energy-forms-and-changes_en.html',
+    definition:'Thermodynamics is the branch of physics that deals with the relationships between heat, work, temperature, and energy.',
+    plain:'Heat is not a substance — it\'s energy in transit. When you touch a hot mug, energy flows from the mug into your hand (not "hotness" moving into you). Temperature measures the average kinetic energy of the particles in a substance. Hot things have fast-moving particles; cold things have slow-moving ones.',
+    concepts:[
+      {title:'Temperature vs Heat',body:'Temperature is a measure of the average kinetic energy of particles — it tells you how "intense" the thermal energy is. Heat is the transfer of thermal energy from a hot object to a cold one. A large cold lake has more total thermal energy than a small hot cup of tea, but the tea has a higher temperature.'},
+      {title:'Methods of Heat Transfer',body:'Conduction: direct contact between particles (touching a hot pan). Convection: fluid movement carrying heat (boiling water, wind). Radiation: electromagnetic waves (feeling the Sun\'s warmth — no medium needed).'},
+      {title:'Laws of Thermodynamics',body:'1st Law: Energy cannot be created or destroyed — only converted. (You can\'t get more energy out of a system than you put in.) 2nd Law: Heat naturally flows from hot to cold, never the reverse. Entropy (disorder) always increases in an isolated system.'},
+      {title:'Specific Heat Capacity',body:'Q = mcΔT. (Q = heat energy, m = mass, c = specific heat capacity, ΔT = temperature change). Water has a very high specific heat capacity — it takes a lot of energy to change its temperature. This is why coastal cities have milder climates.'},
+    ]
+  },
+  {
+    id:'electricity',
+    title:'Electricity & Circuits',
+    icon:'⚡',
+    color:'#f39c12',
+    phet:'https://phet.colorado.edu/sims/html/circuit-construction-kit-dc/latest/circuit-construction-kit-dc_en.html',
+    definition:'Electricity is the flow of electric charge (usually electrons) through a conductor, and the forces and effects associated with that flow.',
+    plain:'Think of electricity like water in a pipe. Voltage is the water pressure pushing the water. Current is how much water flows. Resistance is how narrow the pipe is. More pressure = more flow. Narrower pipe = less flow. Ohm\'s Law (V=IR) describes exactly this relationship.',
+    concepts:[
+      {title:'Voltage, Current, Resistance',body:'Voltage (V): the "electrical pressure" that drives charges — measured in Volts. Current (I): the rate of flow of charge — measured in Amperes (A). Resistance (R): how much a material opposes current flow — measured in Ohms (Ω). Ohm\'s Law: V = IR'},
+      {title:'Series vs Parallel Circuits',body:'Series: components connected one after another. Same current through all. Total resistance adds up. If one bulb blows, the circuit breaks. Parallel: components connected side-by-side. Same voltage across each. Current splits between branches. If one bulb blows, others stay on. (Your house uses parallel circuits for this reason.)'},
+      {title:'Power in Circuits',body:'P = IV = I²R = V²/R. Power (Watts) = how much energy is used per second. A 60W bulb uses 60 joules of energy per second. The higher the current OR voltage, the more power (and heat) is produced.'},
+      {title:'Electromagnetism',body:'Moving charges create magnetic fields. A current-carrying wire has a magnetic field around it — this is how electromagnets and electric motors work. Changing magnetic fields create current — this is how generators and transformers work. These two facts power all of modern civilisation.'},
+    ]
+  },
+  {
+    id:'magnets',
+    title:'Magnets & Fields',
+    icon:'🧲',
+    color:'#1abc9c',
+    phet:'https://phet.colorado.edu/sims/html/magnets-and-electromagnets/latest/magnets-and-electromagnets_en.html',
+    definition:'A magnetic field is a region of space where a magnetic force can be detected, created by moving electric charges or magnetic materials.',
+    plain:'Magnetic fields are invisible force fields. You can\'t see them, but you can feel them — that\'s what makes a compass needle turn. The Earth itself is a giant magnet with a field that protects us from harmful solar radiation. Without it, life on Earth would be impossible.',
+    concepts:[
+      {title:'Magnetic Poles',body:'Every magnet has a north and south pole. Like poles repel (N-N, S-S). Opposite poles attract (N-S). You cannot isolate a single pole — cut a magnet in half and you get two smaller magnets, each with both poles.'},
+      {title:'Magnetic Field Lines',body:'Field lines show the direction and strength of a magnetic field. They go from north to south outside the magnet. Where lines are close together, the field is strong. The simulation lets you see these invisible lines using a virtual "field meter" and iron filings pattern.'},
+      {title:'Electromagnetism',body:'Hans Oersted discovered in 1820 that a current-carrying wire deflects a compass needle — proving electricity and magnetism are linked. A coil of wire carrying current (solenoid) creates a magnetic field just like a bar magnet. More coils, more current = stronger field.'},
+      {title:'Applications',body:'MRI machines use powerful superconducting electromagnets to image the inside of the body. Electric motors use magnetic forces to spin rotors. Maglev trains float above the track using magnetic repulsion, eliminating friction.'},
+    ]
+  },
+];
+
+const SIM_SEB_CONTEXT = {
+  motion:'The student is in the Motion & Forces simulation mode. They can see the PhET simulation for forces and motion. The theory panel explains speed vs velocity, acceleration, Newton\'s laws, and key kinematic equations (v=u+at, F=ma etc.).',
+  waves:'The student is in the Sound & Waves simulation mode. They can see the PhET wave-on-a-string simulation. The theory panel explains transverse vs longitudinal waves, wavelength, frequency, amplitude, and the wave equation v=fλ.',
+  heat:'The student is in Heat & Thermodynamics mode. They have the PhET energy forms simulation. Theory covers temperature vs heat, conduction/convection/radiation, laws of thermodynamics, and Q=mcΔT.',
+  electricity:'The student is in Electricity & Circuits mode with PhET circuit builder. Theory covers V=IR (Ohm\'s Law), series vs parallel circuits, power (P=IV), and electromagnetism.',
+  magnets:'The student is in Magnets & Fields mode with PhET magnets simulation. Theory covers magnetic poles, field lines, electromagnetism (Oersted\'s discovery), and applications like MRI and motors.',
+};
+
+let currentSim = null;
+
+function initSimulations() {
+  const grid = document.getElementById('sim-grid');
+  if (!grid || grid.dataset.built) return;
+  grid.dataset.built = '1';
+  SIMS.forEach(s => {
+    const card = document.createElement('div');
+    card.className = 'sim-card';
+    card.style.borderColor = s.color;
+    card.innerHTML = `
+      <div class="sim-icon" style="color:${s.color}">${s.icon}</div>
+      <div class="sim-name" style="color:${s.color}">${s.title}</div>
+      <div class="sim-desc">${s.definition.substring(0,90)}…</div>`;
+    card.onclick = () => openSim(s.id);
+    grid.appendChild(card);
+  });
 }
 
-/* ════ INIT ════ */
-window.addEventListener('DOMContentLoaded', () => {
-  buildCalcInputs();
+function openSim(id) {
+  const sim = SIMS.find(s => s.id === id);
+  if (!sim) return;
+  currentSim = sim;
+  document.getElementById('sim-grid-wrap').style.display = 'none';
+  document.getElementById('sim-detail').style.display = 'flex';
+
+  // Header
+  document.getElementById('sim-detail-title').textContent = sim.icon + ' ' + sim.title;
+  document.getElementById('sim-detail-title').style.color = sim.color;
+
+  // Theory panel
+  const theory = document.getElementById('sim-theory');
+  theory.innerHTML = `
+    <div class="theory-def-box" style="border-color:${sim.color}">
+      <div class="theory-def-label" style="color:${sim.color}">SCIENTIFIC DEFINITION</div>
+      <div class="theory-def-text">${sim.definition}</div>
+    </div>
+    <div class="theory-plain-box">
+      <div class="theory-plain-label">🧑‍🏫 IN PLAIN ENGLISH</div>
+      <div class="theory-plain-text">${sim.plain}</div>
+    </div>
+    ${sim.concepts.map(c=>`
+      <div class="theory-concept">
+        <div class="theory-concept-title" style="color:${sim.color}">${c.title}</div>
+        <div class="theory-concept-body">${c.body.replace(/\n/g,'<br>')}</div>
+      </div>`).join('')}`;
+
+  // Simulation iframe
+  document.getElementById('sim-iframe').src = sim.phet;
+
+  // Update Sebatana context
+  setSebContext('sim_' + sim.id);
+}
+
+function closeSim() {
+  document.getElementById('sim-grid-wrap').style.display = '';
+  document.getElementById('sim-detail').style.display = 'none';
+  document.getElementById('sim-iframe').src = '';
+  currentSim = null;
+  setSebContext('simulations');
+}
+
+// ════════════════════════════════════
+// STUDY NOTES MODE
+// ════════════════════════════════════
+let studyNotes = {};
+let activeNoteSubject = null;
+let studyInitialized = false;
+
+const STUDY_SUBJECTS = [
+  {id:'chemistry', label:'Chemistry', icon:'⚗️', color:'#3498db'},
+  {id:'physics', label:'Physics', icon:'⚡', color:'#e74c3c'},
+  {id:'biology', label:'Biology', icon:'🧬', color:'#2ecc71'},
+  {id:'math', label:'Mathematics', icon:'📐', color:'#9b59b6'},
+  {id:'general', label:'General Science', icon:'🔬', color:'#f39c12'},
+];
+
+function initStudyMode() {
+  if (studyInitialized) return;
+  studyInitialized = true;
+  const tabs = document.getElementById('study-tabs');
+  if (!tabs) return;
+  tabs.innerHTML = '';
+  STUDY_SUBJECTS.forEach(s => {
+    const btn = document.createElement('button');
+    btn.className = 'study-tab-btn';
+    btn.innerHTML = `${s.icon} ${s.label}`;
+    btn.style.borderColor = s.color;
+    btn.onclick = () => selectStudySubject(s.id, btn, s.color);
+    tabs.appendChild(btn);
+  });
+  selectStudySubject('chemistry', tabs.firstChild, '#3498db');
+}
+
+function selectStudySubject(id, btn, color) {
+  activeNoteSubject = id;
+  document.querySelectorAll('.study-tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  btn.style.background = color;
+  btn.style.color = 'white';
+  renderNotes(id, color);
+}
+
+function renderNotes(subject, color) {
+  const area = document.getElementById('notes-area');
+  if (!area) return;
+  const notes = studyNotes[subject] || [];
+  if (notes.length === 0) {
+    area.innerHTML = `<div class="notes-empty">
+      <div style="font-size:2.5em;margin-bottom:12px">📓</div>
+      <div style="font-family:Rajdhani,sans-serif;font-size:1.1em;letter-spacing:2px;color:#bbb;text-transform:uppercase;">No notes yet</div>
+      <div style="font-size:.8em;color:#ccc;margin-top:8px;">Use the box below to ask Sebatana to help you make notes,<br>or type your own notes and save them.</div>
+    </div>`;
+    return;
+  }
+  area.innerHTML = notes.map((n,i) => `
+    <div class="note-card" style="border-left-color:${color}">
+      <div class="note-card-header">
+        <div class="note-card-title">${n.title}</div>
+        <button class="note-delete-btn" onclick="deleteNote('${subject}',${i})">✕</button>
+      </div>
+      <div class="note-card-body">${n.body}</div>
+      <div class="note-card-meta">${n.date}</div>
+    </div>`).join('');
+}
+
+function saveNote() {
+  const titleEl = document.getElementById('note-title');
+  const bodyEl = document.getElementById('note-body');
+  const title = titleEl.value.trim();
+  const body = bodyEl.value.trim();
+  if (!title || !body || !activeNoteSubject) return;
+  if (!studyNotes[activeNoteSubject]) studyNotes[activeNoteSubject] = [];
+  studyNotes[activeNoteSubject].unshift({
+    title, body,
+    date: new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})
+  });
+  titleEl.value = ''; bodyEl.value = '';
+  const subject = STUDY_SUBJECTS.find(s=>s.id===activeNoteSubject);
+  renderNotes(activeNoteSubject, subject?.color||'#3498db');
+}
+
+function deleteNote(subject, idx) {
+  if (studyNotes[subject]) studyNotes[subject].splice(idx,1);
+  const s = STUDY_SUBJECTS.find(s=>s.id===subject);
+  renderNotes(subject, s?.color||'#3498db');
+}
+
+async function askSebForNotes() {
+  const query = document.getElementById('study-ask').value.trim();
+  if (!query) return;
+  document.getElementById('study-ask').value = '';
+  const subject = STUDY_SUBJECTS.find(s=>s.id===activeNoteSubject);
+  document.getElementById('study-ai-response').innerHTML = `<div class="study-ai-loading"><div class="study-dot"></div><div class="study-dot"></div><div class="study-dot"></div></div>`;
+
+  const prompt = `You are helping a student make study notes on the topic: "${query}" in the subject: ${subject?.label||'Science'}.
+
+Write clear, student-friendly study notes. Format your response EXACTLY like this:
+TITLE: [a clear title for these notes]
+NOTES: [the actual notes content - clear, educational, well structured. Include: a plain-language definition, how it works, key formulas if any, and a real-world example. Keep it focused and useful for revision.]
+
+Do NOT use markdown headers or bullet points. Use short paragraphs. Be educational but accessible to a high school student.`;
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({
+        model:'claude-sonnet-4-20250514', max_tokens:1000,
+        messages:[{role:'user',content:prompt}]
+      })
+    });
+    const data = await res.json();
+    const text = data.content?.map(b=>b.text||'').join('') || '';
+    const titleM = text.match(/TITLE:\s*(.+)/);
+    const bodyM = text.match(/NOTES:\s*([\s\S]+)/);
+    const title = titleM ? titleM[1].trim() : query;
+    const body = bodyM ? bodyM[1].trim() : text;
+    document.getElementById('study-ai-response').innerHTML = `
+      <div class="study-ai-preview">
+        <div class="study-ai-preview-title">${title}</div>
+        <div class="study-ai-preview-body">${body}</div>
+        <div style="display:flex;gap:10px;margin-top:12px;">
+          <button class="study-save-btn" onclick="saveGeneratedNote('${encodeURIComponent(title)}','${encodeURIComponent(body)}')">💾 Save to Notes</button>
+          <button class="study-discard-btn" onclick="document.getElementById('study-ai-response').innerHTML=''">Discard</button>
+        </div>
+      </div>`;
+  } catch(e) {
+    document.getElementById('study-ai-response').innerHTML = `<div style="color:#e74c3c;font-size:.82em;padding:10px;">Connection error — please check your internet and try again.</div>`;
+  }
+}
+
+function saveGeneratedNote(title, body) {
+  const t = decodeURIComponent(title);
+  const b = decodeURIComponent(body);
+  if (!studyNotes[activeNoteSubject]) studyNotes[activeNoteSubject] = [];
+  studyNotes[activeNoteSubject].unshift({
+    title: t, body: b,
+    date: new Date().toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'})
+  });
+  document.getElementById('study-ai-response').innerHTML = '';
+  const subject = STUDY_SUBJECTS.find(s=>s.id===activeNoteSubject);
+  renderNotes(activeNoteSubject, subject?.color||'#3498db');
+}
+
+
+/* ════ 6. SEBATANA (all modes, right-side) ════ */
+// ════════════════════════════════════
+// SEBATANA — FIXED, UNIFIED, ALL MODES
+// ════════════════════════════════════
+
+let sebOpen = false;
+let sebMsgHistory = [];
+let sebCurrentContext = 'home';
+let errorCount = 0;
+let lastActivityTime = Date.now();
+let activityTimer = null;
+let lastGoodJobTime = 0;
+
+const SEB_CONTEXTS = {
+  home: { label:'Home', desc:'The student is on the TF Innovations home page. Available modes: Periodic Table, Atom Bonding Lab, Wavelengths, Thesis Mode, Simulations, Study Notes.' },
+  periodic: { label:'Periodic Table', desc:'The student is viewing the interactive periodic table. All 118 elements are shown colour-coded by category. Clicking an element shows a 3D holographic card with atomic number, mass, valence electrons (gold dots), group, uses, bonding partners, and a description. The student can select multiple elements to search PDB protein database entries. Period numbers (1-7) run down the left. Roman numeral group labels (I-XVIII) run across the top.' },
+  bonding: { label:'Atom Bonding Lab', desc:'The student is in the Atom Bonding Lab. They first add compounds (e.g. H2, Cl2), then enter a balanced equation (e.g. H2 + Cl2 → 2HCl). The equation is validated before proceeding. Then an electron balance guide shows each element\'s group, valence electrons, and whether it gives or receives electrons. The student drags individual atom balls onto a canvas and brings them together to form bonds. Valid bonds (correct elements, correct valence) flash green with a chime. Invalid bonds flash red with a low sound. Example: for H2O, two H atoms must each bond to the O atom — H cannot bond to H.', example:'H2 + Cl2 → 2HCl: Hydrogen (group 1, gives 1 electron) bonds with Chlorine (group 17, needs 1 electron). One H per Cl. Two of each atom needed to make 2 HCl molecules.' },
+  wavelengths: { label:'Wavelengths Mode', desc:'The student is in the Wavelengths physics learning mode with an orange theme. They first chose a grade (10, 11, or 12) which determines the content depth. Grade 10: wave equation v=fλ, transverse vs longitudinal waves. Grade 11: EM spectrum, Doppler effect, period T=1/f. Grade 12: photon energy E=hf, photoelectric effect Ek=hf-φ, wave-particle duality, de Broglie λ=h/mv. An animated wave visualiser shows frequency, amplitude and speed. An interactive calculator shows working steps. A quiz tests understanding with explanations.' },
+  thesis: { label:'Thesis Mode (Ntokozo)', desc:'The student is chatting with Ntokozo, the thesis development AI. Ntokozo guides students through developing a project thesis by asking questions — never writing it for them. Stages: Explore (what is the idea?), Refine (who is it for? what does it do?), Thesis (write a statement using a framework), Build (features, phases), Code (technical implementation). The chat has an orange/warm theme.' },
+  simulations: { label:'Simulations Mode', desc:'The student is in the Simulations mode which has 5 PhET simulation topics: Motion & Forces, Sound & Waves, Heat & Thermodynamics, Electricity & Circuits, Magnets & Fields. Each topic has a theory panel with scientific definition, plain-English explanation, and key concepts/formulas, alongside an embedded PhET simulation.' },
+  study: { label:'Study Notes Mode', desc:'The student is in Study Notes mode. They can write their own notes or ask Sebatana (via the AI button) to generate structured study notes on any topic. Notes are organised by subject tab (Chemistry, Physics, Biology, Mathematics, General Science). Generated notes have a title and body and can be saved.' },
+};
+// Dynamic sim contexts added by simulations JS
+for (const [k,v] of Object.entries(typeof SIM_SEB_CONTEXT !== 'undefined' ? SIM_SEB_CONTEXT : {})) {
+  SEB_CONTEXTS['sim_'+k] = { label: k, desc: v };
+}
+
+function setSebContext(ctx) {
+  sebCurrentContext = ctx;
+  const info = SEB_CONTEXTS[ctx] || SEB_CONTEXTS['home'];
+  const bar = document.getElementById('sebContextBar');
+  if (bar) bar.textContent = '📍 ' + info.label;
+}
+
+function toggleSeb() {
+  sebOpen = !sebOpen;
+  document.getElementById('seb-panel').classList.toggle('open', sebOpen);
+  const notif = document.getElementById('sebNotif');
+  if (notif) notif.classList.remove('show');
+  if (sebOpen && sebMsgHistory.length === 0) {
+    sebGreet();
+    triggerSebWave();
+  }
+}
+
+function triggerSebWave() {
+  const head = document.getElementById('sebHead');
+  if (!head) return;
+  head.classList.remove('waving');
+  void head.offsetWidth;
+  head.classList.add('waving');
+  setTimeout(() => head.classList.remove('waving'), 1200);
+}
+
+function sebGreet() {
+  const ctx = SEB_CONTEXTS[sebCurrentContext] || SEB_CONTEXTS['home'];
+  const greet = `Hey! 👋 I'm <strong>Sebatana</strong>, your TF lab monitor.\n\nI'm in <em>${ctx.label}</em> mode with you right now. I know what's on the screen and can help you understand anything — but I won't just hand you answers. I'll guide you to figure things out yourself, like a good teacher would.\n\nWhat would you like to understand?`;
+  addSebMsg('seb', greet, true);
+  setSebMood('happy');
+}
+
+function addSebMsg(from, text, html=false) {
+  const msgs = document.getElementById('sebMsgs');
+  if (!msgs) return;
+  const wrap = document.createElement('div');
+  wrap.className = 'msg ' + from;
+  const av = document.createElement('div');
+  av.className = 'msg-avatar';
+  av.textContent = from === 'seb' ? 'S' : 'You';
+  const bub = document.createElement('div');
+  bub.className = 'msg-bubble';
+  if (html) bub.innerHTML = text.replace(/\n/g,'<br>');
+  else bub.textContent = text;
+  wrap.appendChild(av); wrap.appendChild(bub);
+  msgs.appendChild(wrap);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function showSebTyping() {
+  const msgs = document.getElementById('sebMsgs');
+  if (!msgs) return;
+  const t = document.createElement('div');
+  t.className = 'msg seb'; t.id = 'seb-typing';
+  t.innerHTML = `<div class="msg-avatar">S</div><div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>`;
+  msgs.appendChild(t);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+function removeSebTyping() { document.getElementById('seb-typing')?.remove(); }
+
+function setSebMood(mood) {
+  const m = document.getElementById('sebMouth');
+  if (m) m.className = 'seb-mouth ' + mood;
+}
+
+function renderSebSuggestions(sugs) {
+  const wrap = document.getElementById('sebSuggestions');
+  if (!wrap) return;
+  wrap.innerHTML = sugs.map(s => `<div class="sug-chip" onclick="sendSebQuick('${s.replace(/'/g,"\\'")}')" >💬 ${s}</div>`).join('');
+}
+
+function sendSebQuick(text) {
+  const inp = document.getElementById('sebInput');
+  if (inp) inp.value = text;
+  sendSeb();
+}
+
+async function sendSeb() {
+  const input = document.getElementById('sebInput');
+  const text = input?.value.trim();
+  if (!text) return;
+  if (input) input.value = '';
+  addSebMsg('user', text);
+  setSebMood('thinking');
+  const statusEl = document.getElementById('sebStatusTxt');
+  if (statusEl) statusEl.textContent = 'Thinking…';
+  showSebTyping();
+  lastActivityTime = Date.now();
+
+  const ctx = SEB_CONTEXTS[sebCurrentContext] || SEB_CONTEXTS['home'];
+
+  const systemPrompt = `You are Sebatana — a warm, encouraging, knowledgeable lab monitor AI for TF Innovations, an interactive science education website. You help HIGH SCHOOL students understand science.
+
+YOUR PERSONALITY:
+- Patient, friendly, slightly playful — like an excellent teacher who genuinely cares
+- You use the Socratic method: you NEVER just give direct answers to science problems. You ask guiding questions and give hints that lead students to figure things out themselves.
+- You DO explain concepts clearly when asked "what does X mean" or "explain Y" — that's different from solving their problems for them.
+- Short, conversational replies (2-4 sentences) unless explaining a concept
+
+CURRENT SCREEN CONTEXT:
+Mode: ${ctx.label}
+${ctx.desc}
+
+RULES:
+1. If a student asks you to SOLVE a problem (find a value, balance an equation), don't — instead ask what they already know and point them toward the right formula or concept.
+2. If a student asks what something MEANS or asks you to EXPLAIN — do explain it clearly, in plain language.
+3. Always reference the current mode's content specifically (use the example equations, element names, simulation topics, etc. from the context above).
+4. You can ONLY see TF Innovations — you have no knowledge of anything external.
+5. If asked about study notes, help them understand the topic so they can write better notes themselves — or if they ask you to generate notes, you may do so.
+6. Keep it encouraging. Science is hard — normalize mistakes.`;
+
+  sebMsgHistory.push({ role:'user', content:text });
+  if (sebMsgHistory.length > 16) sebMsgHistory = sebMsgHistory.slice(-16);
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:600,
+        system: systemPrompt,
+        messages: sebMsgHistory,
+      })
+    });
+    const data = await res.json();
+    removeSebTyping();
+    if (data.error) throw new Error(data.error.message);
+    const reply = data.content?.map(b=>b.type==='text'?b.text:'').join('') || "I had a momentary glitch — please try again!";
+    sebMsgHistory.push({ role:'assistant', content:reply });
+    addSebMsg('seb', reply, true);
+    setSebMood('happy');
+    if (statusEl) statusEl.textContent = 'Monitoring your session';
+
+    // Context-aware suggestions after reply
+    const ctxSugs = {
+      periodic:['What are valence electrons?','Why do noble gases not bond?','What does the group number mean?'],
+      bonding:['Why does H bond with Cl here?','What is a covalent bond?','Why is my bond flashing red?'],
+      wavelengths:['Explain v = fλ to me','What is the Doppler effect?','What is a photon?'],
+      thesis:['How do I write a thesis statement?','What features should I include?'],
+      simulations:['What does this simulation show?','Explain the key formula','Give me a real-world example'],
+      study:['Help me understand this topic','What should I include in my notes?'],
+    };
+    const base = sebCurrentContext.startsWith('sim_') ? 'simulations' : sebCurrentContext;
+    if (ctxSugs[base]) renderSebSuggestions(ctxSugs[base]);
+  } catch(e) {
+    removeSebTyping();
+    addSebMsg('seb', `I couldn't reach my brain right now (${e.message||'connection error'}). Check your internet and try again — I'll be here!`, false);
+    setSebMood('thinking');
+    if (statusEl) statusEl.textContent = 'Connection issue';
+  }
+}
+
+// ── Activity monitor
+function startActivityMonitor() {
+  stopActivityMonitor();
+  ['mousemove','keydown','click','touchstart'].forEach(ev => document.addEventListener(ev, markActivity, {passive:true}));
+  activityTimer = setInterval(checkActivity, 30000);
+}
+function stopActivityMonitor() {
+  if (activityTimer) { clearInterval(activityTimer); activityTimer = null; }
+  ['mousemove','keydown','click','touchstart'].forEach(ev => document.removeEventListener(ev, markActivity));
+}
+function markActivity() { lastActivityTime = Date.now(); }
+function checkActivity() {
+  const elapsed = (Date.now() - lastActivityTime) / 60000;
+  const sinceGoodJob = Date.now() - lastGoodJobTime;
+  if (elapsed < 0.3 && sinceGoodJob > 300000) {
+    showSebNotification(['Great work! 🌟 Keep it up!','Nice effort! 👏 You\'re making real progress.','Brilliant! ⚛️ Consistency is how science is mastered.'][Math.floor(Math.random()*3)]);
+    lastGoodJobTime = Date.now();
+  }
+  if (elapsed >= 3) {
+    const nudges = {
+      periodic:"Haven't seen you click anything in a while! 🤔 Try clicking any element — even something you already know, like Oxygen (O). Can you figure out why it needs 2 electrons to bond?",
+      bonding:"Still there? 💭 Remember — drag atoms from the palette on the left onto the canvas, then bring them close together. Think about your equation: which atoms need to touch?",
+      wavelengths:"Taking a break? 📚 When you're ready, try the interactive calculator and see if you can get the right speed for sound (should be ~340 m/s). Use v = fλ.",
+      simulations:"Haven't explored the simulation yet? 🔭 Try dragging something in the PhET window — and check the theory panel on the right to understand what you're seeing.",
+      study:"Ready to make some notes? 📓 Type a topic in the box below and I'll help you build structured study notes for it.",
+    };
+    const base = sebCurrentContext.startsWith('sim_') ? 'simulations' : sebCurrentContext;
+    showSebNotification(nudges[base] || "Hey — still with me? 👋 Let me know if you need a hint!");
+    lastActivityTime = Date.now();
+  }
+}
+function showSebNotification(text) {
+  const notif = document.getElementById('sebNotif');
+  if (!sebOpen) {
+    if (notif) notif.classList.add('show');
+  } else {
+    addSebMsg('seb', text, true);
+  }
+}
+
+// Bond error tracking
+let _bondErrCount = 0;
+function sebOnError() {
+  _bondErrCount++;
+  if (_bondErrCount >= 3) {
+    _bondErrCount = 0;
+    showSebNotification("Three red bonds! 🔴 Let me help.\n\nCheck: (1) Are both atoms supposed to be in the same product molecule? (2) Has either atom used up all its valence bonds already? For H₂O: each H bonds to O, not to each other. Try thinking about which atoms SHOULD touch.");
+    if (!sebOpen) toggleSeb();
+  }
+}
+
+// Auto-resize textarea
+document.addEventListener('DOMContentLoaded', () => {
+  const sebInp = document.getElementById('sebInput');
+  if (sebInp) sebInp.addEventListener('input', () => {
+    sebInp.style.height = 'auto';
+    sebInp.style.height = Math.min(sebInp.scrollHeight, 80) + 'px';
+  });
+  sebInp?.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendSeb(); }
+  });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && sebOpen) toggleSeb(); });
+  setTimeout(() => { if (typeof initSimulations === 'function') initSimulations(); }, 200);
+});
+
+
+/* ════ 7. ERROR BRIDGE ════ */
+(function(){
+  var _origFlash = window.flashScreen;
+  var _ec = 0;
+  window.flashScreen = function(ok) {
+    if (_origFlash) _origFlash(ok);
+    if (!ok) { _ec++; if (_ec >= 3) { _ec = 0; if(typeof sebOnError==='function') sebOnError(); } }
+  };
+})();
+
+/* ════ 8. INIT ════ */
+window.addEventListener('DOMContentLoaded', function() {
+  showPage('home-page');
+  if (typeof buildCalcInputs === 'function') setTimeout(buildCalcInputs, 300);
+  if (typeof initSimulations === 'function') setTimeout(initSimulations, 200);
 });
 </script>
 </body>
